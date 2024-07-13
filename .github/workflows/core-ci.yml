@@ -21,3 +21,13 @@ jobs:
     with:
       dotnet-version: 8.0.x
       dotnet-solution-path: ${{ matrix.solution }}
+
+  analyze:
+    name: Scanning for vunerabilities
+    permissions:
+      security-events: write
+      packages: read # required to fetch internal or private CodeQL packs
+      contents: read
+    uses: ./.github/workflows/scan-for-security-issues.yml
+    with:
+      language: csharp

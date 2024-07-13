@@ -1,0 +1,36 @@
+name: "Core - Analysis"
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      language:
+        type: string
+        description: Configured language
+        required: true
+
+jobs:
+  analyze:
+    name: Analyze (${{ inputs.language }})
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 360
+    
+    permissions:
+      security-events: write # required for all workflows
+      packages: read # required to fetch internal or private CodeQL packs
+      contents: read
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ inputs.language }}
+        build-mode: none
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{inputs.language}}"
