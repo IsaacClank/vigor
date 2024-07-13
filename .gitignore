@@ -1,0 +1,4 @@
+# .NET artifacts
+**/obj/
+**/bin/
+vigor.sln
