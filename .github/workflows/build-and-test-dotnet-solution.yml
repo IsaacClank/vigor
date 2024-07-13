@@ -1,0 +1,30 @@
+name: .NET - Build and test
+
+on:
+  workflow_call:
+    inputs:
+      dotnet-version:
+        type: string
+        description: The .NET version to use
+        default: 8.0.x
+      dotnet-solution-path:
+        type: string
+        description: Path to the .NET solution
+        default: ./
+
+jobs:
+  build-and-test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ inputs.dotnet-version }}
+    - name: Restore dependencies
+      run: dotnet restore ${{ inputs.dotnet-solution-path }}
+    - name: Build
+      run: dotnet build --no-restore ${{ inputs.dotnet-solution-path }}
+    - name: Test
+      run: dotnet test --no-build --verbosity normal ${{ inputs.dotnet-solution-path }}

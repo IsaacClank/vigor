@@ -1,0 +1,23 @@
+name: Core - Check pull request
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    paths: [ "*./core-modules/" ]
+
+jobs:
+  build-and-test:
+    name: Build and test
+    strategy:
+      matrix:
+        solution:
+          - ./core-modules/module-auth/
+          - ./core-modules/module-contract/
+          - ./core-modules/module-user/
+    uses: ./.github/workflows/build-and-test-dotnet-solution.yml
+    with:
+      dotnet-version: 8.0.x
+      dotnet-solution-path: ${{ matrix.solution }}
