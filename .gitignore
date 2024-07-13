@@ -1,4 +1,7 @@
+# VSCode artifacts
+**/*.code-workspace
+
 # .NET artifacts
 **/obj/
 **/bin/
-vigor.sln
+./*.sln
