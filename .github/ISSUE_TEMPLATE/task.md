@@ -1,14 +1,14 @@
 ---
-name: Task template
+name: Task
 about: Template for a Task issue
 title: "[TASK] "
 labels: Task
-assignees: ''
+assignees: IsaacClank
 
 ---
 
-## Requirement
+# Description
 
-## Scope
+## Todo
 
-- [ ] Task 1
+- [ ]
