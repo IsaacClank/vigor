@@ -1,10 +1,9 @@
 services:
   db:
-    image: postgres
-    restart: always
+    build: ./docker/db
     environment:
-      POSTGRES_DB: user
-      POSTGRES_USER: dev
-      POSTGRES_PASSWORD: dev-password
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
     ports:
       - 5432:5432
