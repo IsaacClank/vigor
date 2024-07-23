@@ -6,7 +6,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-    paths: [ "*core-modules/*" ]
+    paths: [ "*core/*" ]
 
 jobs:
   build-and-test:
@@ -14,20 +14,23 @@ jobs:
     strategy:
       matrix:
         solution:
-          - core-modules/module-auth
-          - core-modules/module-contract
-          - core-modules/module-user
-    uses: ./.github/workflows/build-and-test-dotnet-solution.yml
+          - core/module-auth
+          - core/module-contract
+          - core/module-user
+    uses: ./.github/workflows/_build-and-test-dotnet-solution.yml
     with:
       dotnet-version: 8.0.x
       dotnet-solution-path: ${{ matrix.solution }}
 
   analyze:
-    name: Scanning for vunerabilities
+    name: Discover ${{ matrix.language }} vunerabilities
+    strategy:
+      matrix:
+        language: [ "csharp" ]
     permissions:
       security-events: write
       packages: read # required to fetch internal or private CodeQL packs
       contents: read
-    uses: ./.github/workflows/scan-for-security-issues.yml
+    uses: ./.github/workflows/_discover-vulnerabilities.yml
     with:
-      language: csharp
+      language: ${{ matrix.language }}

@@ -1,7 +1,6 @@
-name: "Core - Analysis"
+name: CodeQL Analysis
 
 on:
-  workflow_dispatch:
   workflow_call:
     inputs:
       language:
