@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace User.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateOutboxReplicationSlot : Migration
+    public class CreateOutboxReplicationSlot : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
