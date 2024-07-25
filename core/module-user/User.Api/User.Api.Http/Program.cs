@@ -1,6 +1,6 @@
 using User.Database;
 
-namespace User.Api
+namespace User.Api.Http
 {
   public static class Program
   {
