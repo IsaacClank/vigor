@@ -25,6 +25,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ${{ inputs.dotnet-solution-path }}
     - name: Build
-      run: dotnet build --no-restore ${{ inputs.dotnet-solution-path }}
+      run: dotnet build --no-restore ${{ inputs.dotnet-solution-path }} -warnaserror
     - name: Test
       run: dotnet test --no-build --verbosity normal ${{ inputs.dotnet-solution-path }}
