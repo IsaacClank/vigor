@@ -6,7 +6,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-    paths: [ "*core/*" ]
+    paths: [ "core/**" ]
 
 jobs:
   build-and-test:
