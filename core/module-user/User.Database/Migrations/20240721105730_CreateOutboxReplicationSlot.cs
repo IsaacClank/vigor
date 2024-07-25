@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace User.Database.Migrations
 {
     /// <inheritdoc />
-    public class CreateOutboxReplicationSlot : Migration
+    public partial class CreateOutboxReplicationSlot : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
