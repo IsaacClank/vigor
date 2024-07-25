@@ -10,7 +10,7 @@ on:
 
 jobs:
   analyze:
-    name: Analyze (${{ inputs.language }})
+    name: Analyze
     runs-on: 'ubuntu-latest'
     timeout-minutes: 360
     

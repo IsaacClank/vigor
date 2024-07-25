@@ -14,13 +14,20 @@ jobs:
     strategy:
       matrix:
         solution:
-          - core/module-auth
-          - core/module-contract
-          - core/module-user
+          - Auth
+          - Contract
+          - User
+        include:
+            - solution: Auth
+              path: core/module-auth
+            - solution: Contract
+              path: core/module-contract
+            - solution: User
+              path: core/module-user
     uses: ./.github/workflows/_build-and-test-dotnet-solution.yml
     with:
       dotnet-version: 8.0.x
-      dotnet-solution-path: ${{ matrix.solution }}
+      dotnet-solution-path: ${{ matrix.path }}
 
   analyze:
     name: Discover ${{ matrix.language }} vunerabilities
