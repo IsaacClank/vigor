@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Contract.Database
 {
-  public static class Lib
+  public static class Library
   {
     public static void AddContractDbContext(this IServiceCollection services, string connectionString)
     {

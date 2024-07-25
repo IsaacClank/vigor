@@ -25,7 +25,7 @@ namespace Contract.Api
   {
     public static void AddContractDbContext(this IHostApplicationBuilder builder) => builder.Services.AddContractDbContext(
         builder.Configuration.GetConnectionString("ContractDatabase")
-            ?? throw new Exception("Database connection string cannot be null.")
+            ?? throw new ArgumentException("Database connection string cannot be null.")
     );
   }
 }

@@ -25,7 +25,7 @@ namespace User.Api
   {
     public static void AddUserDbContext(this IHostApplicationBuilder builder) => builder.Services.AddUserDbContext(
         builder.Configuration.GetConnectionString("UserDatabase")
-            ?? throw new Exception("Database connection string cannot be null.")
+            ?? throw new ArgumentException("Database connection string cannot be null.")
     );
   }
 }
