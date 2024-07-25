@@ -5,8 +5,13 @@ namespace User.Database
 {
   public static class Library
   {
-    public static void AddUserDbContext(this IServiceCollection services, string connectionString)
+    public static void AddUserDbContext(this IServiceCollection services, string? connectionString)
     {
+      if (string.IsNullOrWhiteSpace(connectionString))
+      {
+        throw new ArgumentNullException(nameof(connectionString), "Database connection cannot be null.");
+      }
+
       services.AddDbContext<UserDbContext>(o => o.UseNpgsql(connectionString));
     }
   }

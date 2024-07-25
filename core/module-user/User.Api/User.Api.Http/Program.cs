@@ -9,7 +9,7 @@ namespace User.Api.Http
       var builder = WebApplication.CreateBuilder(args);
 
       // Add services to the container.
-      builder.AddUserDbContext();
+      builder.Services.AddUserDbContext(builder.Configuration.GetConnectionString("UserDatabase"));
       builder.Services.AddControllers();
       builder.Services.AddSwaggerGen();
 
@@ -19,13 +19,5 @@ namespace User.Api.Http
       app.MapControllers();
       app.Run();
     }
-  }
-
-  public static class ProgramExtensions
-  {
-    public static void AddUserDbContext(this IHostApplicationBuilder builder) => builder.Services.AddUserDbContext(
-        builder.Configuration.GetConnectionString("UserDatabase")
-            ?? throw new ArgumentException("Database connection string cannot be null.")
-    );
   }
 }
