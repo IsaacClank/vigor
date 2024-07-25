@@ -8,6 +8,10 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+#### .NET Coding Quality Rules ####
+
+dotnet_diagnostic.CA1848.severity = silent
+
 #### .NET Coding Conventions ####
 
 # Organize usings
