@@ -12,9 +12,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="NRedisStack" Version="0.12.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\User.Database\User.Database.csproj" />
+    <ProjectReference Include="..\User.Common.Queue\User.Common.Queue.csproj" />
   </ItemGroup>
 </Project>
