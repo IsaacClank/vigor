@@ -5,23 +5,17 @@ namespace User.Database
 {
   public sealed class UserDbContext(DbContextOptions<UserDbContext> options) : DbContext(options)
   {
-    public object? GetNextLogicalSlotChange()
+    public bool HasNewOutboxEntry()
     {
-      var x = Database.SqlQuery<string>($"SELECT data AS Value FROM pg_logical_slot_peek_changes('outbox', null, 1)").ToList().FirstOrDefault();
-
-      if (x is null)
-      {
-        return x;
-      }
-      else
-      {
-        return JsonSerializer.Deserialize<object>(x);
-      }
+      return Database
+        .SqlQuery<IEnumerable<string>>($"SELECT lsn FROM pg_logical_slot_peek_changes('outbox', null, 1)")
+        .Any();
     }
 
-    public void AcknowledgeLatestLogicalSlotChange()
+    public OutboxEntryData GetLatestOutboxEntry()
     {
-      Database.ExecuteSql($"SELECT data AS Value FROM pg_logical_slot_get_changes('outbox', null, 1)");
+      var result = Database.SqlQueryRaw<string>($"SELECT data as \"Value\" FROM pg_logical_slot_get_changes('outbox', null, 1)").Single();
+      return JsonSerializer.Deserialize<OutboxEntryData>(result) ?? throw new JsonException("Cannot deserialize outbox payload");
     }
   }
 }
