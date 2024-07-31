@@ -11,11 +11,11 @@ ENV POSTGRES_PASSWORD=$POSTGRES_PASSWORD
 RUN apt update
 RUN apt install postgresql-16-wal2json
 
-RUN mkdir -p /etc/postgresql
-COPY ./config-server.conf /etc/postgresql/postgresql.conf
-COPY ./config-authentication.conf /etc/postgresql/pg_hba.conf
+WORKDIR /docker-entrypoint-initdb.d
+COPY ./init-db.sh init-db.sh
 
-RUN mkdir -p /docker-entrypoint-initdb.d
-COPY ./init-db.sh /docker-entrypoint-initdb.d/
+WORKDIR /etc/postgresql
+COPY ./config-server.conf postgresql.conf
+COPY ./config-authentication.conf pg_hba.conf
 
 CMD ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf", "-c", "hba_file=/etc/postgresql/pg_hba.conf"]
