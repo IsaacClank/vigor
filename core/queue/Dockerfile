@@ -1,6 +1,27 @@
 FROM redis:7.2.5-bookworm
 
-RUN mkdir /usr/local/etc/redis
-COPY ./redis.conf /usr/local/etc/redis/redis.conf
+ARG ADMIN_PASSWORD=admin-password
+ARG MOD_AUTH_DB_DISPATCHER_PASSWORD=auth-db-dispatcher-password
+ARG MOD_AUTH_QUEUE_CONSUMER_PASSWORD=auth-queue-consumer-password
+ARG MOD_CONTRACT_DB_DISPATCHER_PASSWORD=contract-db-dispatcher-password
+ARG MOD_CONTRACT_QUEUE_CONSUMER_PASSWORD=contract-queue-consumer-password
+ARG MOD_USER_DB_DISPATCHER_PASSWORD=user-db-dispatcher-password
+ARG MOD_USER_QUEUE_CONSUMER_PASSWORD=user-queue-consumer-password
 
-CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+ENV MOD_AUTH_DB_DISPATCHER_PASSWORD=$MOD_AUTH_DB_DISPATCHER_PASSWORD
+ENV MOD_AUTH_QUEUE_CONSUMER_PASSWORD=$MOD_AUTH_QUEUE_CONSUMER_PASSWORD
+ENV MOD_CONTRACT_DB_DISPATCHER_PASSWORD=$MOD_CONTRACT_DB_DISPATCHER_PASSWORD
+ENV MOD_CONTRACT_QUEUE_CONSUMER_PASSWORD=$MOD_CONTRACT_QUEUE_CONSUMER_PASSWORD
+ENV MOD_USER_DB_DISPATCHER_PASSWORD=$MOD_USER_DB_DISPATCHER_PASSWORD
+ENV MOD_USER_QUEUE_CONSUMER_PASSWORD=$MOD_USER_QUEUE_CONSUMER_PASSWORD
+
+RUN ["apt-get", "update"]
+RUN ["apt-get", "install", "-y", "gettext-base"]
+
+WORKDIR /usr/share/doc/redis
+COPY redis.conf.template /usr/share/doc/redis/redis.conf
+
+WORKDIR /usr/local/etc/redis
+RUN envsubst < /usr/share/doc/redis/redis.conf > redis.conf
+
+CMD [ "redis-server", "redis.conf" ]
