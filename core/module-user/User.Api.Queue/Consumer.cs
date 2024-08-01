@@ -1,13 +1,11 @@
+using User.Common.Queue;
+
 namespace User.Api.Queue;
 
-public class Worker : BackgroundService
+public class Consumer(ILogger<Consumer> logger, QueueClient queue) : BackgroundService
 {
-  private readonly ILogger<Worker> _logger;
-
-  public Worker(ILogger<Worker> logger)
-  {
-    _logger = logger;
-  }
+  private readonly ILogger<Consumer> _logger = logger;
+  private readonly QueueClient _queue = queue;
 
   protected override async Task ExecuteAsync(CancellationToken stoppingToken)
   {

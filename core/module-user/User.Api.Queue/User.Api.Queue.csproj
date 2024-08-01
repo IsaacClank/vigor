@@ -16,5 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\User.Database\User.Database.csproj" />
+    <ProjectReference Include="..\User.Common.Queue\User.Common.Queue.csproj" />
   </ItemGroup>
 </Project>

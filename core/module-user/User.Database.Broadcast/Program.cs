@@ -5,9 +5,7 @@ using User.Common.Queue;
 var builder = Host.CreateApplicationBuilder(args);
 
 builder.Services.AddUserDbContext(builder.Configuration.GetConnectionString("UserDatabase"));
-builder.Services.AddSingleton<QueueClient>((_provider) => new(
-  builder.Configuration.GetConnectionString("Queue")
-  ?? throw new ArgumentException("Queue connection string cannot be null.")));
+builder.Services.AddSingleton<QueueClient>((_) => new(builder.Configuration.GetConnectionString("Queue")));
 
 builder.Services.AddHostedService<DatabaseBroadcaster>();
 
