@@ -85,7 +85,8 @@
 # You will also need to set a password unless you explicitly disable protected
 # mode.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-bind 0.0.0.0 127.0.0.1 -::1
+bind 127.0.0.1 -::1
+bind 0.0.0.0
 
 # By default, outgoing connections (from replica to master, from Sentinel to
 # instances, cluster bus, etc.) are not bound to a specific local address. In
@@ -1012,12 +1013,13 @@ replica-priority 100
 #
 # For more information about ACL configuration please refer to
 # the Redis web site at https://redis.io/docs/latest/operate/oss_and_stack/management/security/acl/.
-user module__auth__db_dispatcher reset on +XADD %W~*stream__core* >${MOD_AUTH_DB_DISPATCHER_PASSWORD}
-user module__auth__queue_consumer reset on +XREADGROUP ~*stream__core* >${MOD_AUTH_QUEUE_CONSUMER_PASSWORD}
-user module__contract__db_dispatcher reset on +XADD %W~*stream__core* >${MOD_CONTRACT_DB_DISPATCHER_PASSWORD}
-user module__contract__queue_consumer reset on +XREADGROUP ~*stream__core* >${MOD_CONTRACT_QUEUE_CONSUMER_PASSWORD}
-user module__user__db_dispatcher reset on +XADD %W~*stream__core* >${MOD_USER_DB_DISPATCHER_PASSWORD}
-user module__user__queue_consumer reset on +XREADGROUP ~*stream__core* >${MOD_USER_QUEUE_CONSUMER_PASSWORD}
+user module__auth__db_dispatcher reset on +ECHO +XADD %W~*stream__core* >${MOD_AUTH_DB_DISPATCHER_PASSWORD}
+user module__auth__queue_consumer reset on +ECHO +XREADGROUP ~*stream__core* >${MOD_AUTH_QUEUE_CONSUMER_PASSWORD}
+user module__contract__db_dispatcher reset on +ECHO +XADD %W~*stream__core* >${MOD_CONTRACT_DB_DISPATCHER_PASSWORD}
+user module__contract__queue_consumer reset on +ECHO +XREADGROUP ~*stream__core* >${MOD_CONTRACT_QUEUE_CONSUMER_PASSWORD}
+user module__user__db_dispatcher reset on +ECHO +XADD %W~*stream__core* >${MOD_USER_DB_DISPATCHER_PASSWORD}
+# user module__user__queue_consumer reset on +ECHO +XGROUP|CREATE +XREADGROUP >${MOD_USER_QUEUE_CONSUMER_PASSWORD}
+user module__user__queue_consumer reset on +@all ~* >${MOD_USER_QUEUE_CONSUMER_PASSWORD}
 
 # ACL LOG
 #
