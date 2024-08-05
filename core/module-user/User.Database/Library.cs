@@ -7,12 +7,22 @@ namespace User.Database
   {
     public static void AddUserDbContext(this IServiceCollection services, string? connectionString)
     {
+      ValidateDbConnectionString(connectionString);
+      services.AddDbContext<UserDbContext>(o => o.UseNpgsql(connectionString));
+    }
+
+    public static void AddUserDbContextFactory(this IServiceCollection services, string? connectionString)
+    {
+      ValidateDbConnectionString(connectionString);
+      services.AddDbContextFactory<UserDbContext>(o => o.UseNpgsql(connectionString));
+    }
+
+    private static void ValidateDbConnectionString(string? connectionString)
+    {
       if (string.IsNullOrWhiteSpace(connectionString))
       {
         throw new ArgumentNullException(nameof(connectionString), "Database connection cannot be null.");
       }
-
-      services.AddDbContext<UserDbContext>(o => o.UseNpgsql(connectionString));
     }
   }
 }
