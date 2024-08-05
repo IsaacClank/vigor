@@ -3,11 +3,16 @@ using User.Common.Queue;
 
 namespace User.Database.Broadcast
 {
-  public class DatabaseBroadcaster(ILogger<DatabaseBroadcaster> logger, IServiceProvider serviceProvider, QueueClient redisClient) : BackgroundService
+  public class DatabaseBroadcaster(
+      ILogger<DatabaseBroadcaster> logger,
+      IServiceProvider serviceProvider,
+      QueueClient redisClient,
+      IQueuePublisher queuePublisher) : BackgroundService
   {
     private readonly ILogger<DatabaseBroadcaster> _logger = logger;
     private readonly IServiceProvider _serviceProvider = serviceProvider;
     private readonly QueueClient _redisClient = redisClient;
+    private readonly IQueuePublisher _queuePublisher = queuePublisher;
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -29,47 +34,46 @@ namespace User.Database.Broadcast
       }
       _logger.LogInformation("Detected outbox event");
 
-      try
+      var outboxEntry = db.GetLatestOutboxEntry();
+
+      if (_logger.IsEnabled(LogLevel.Trace))
       {
-        var outboxEvent = db.GetLatestOutboxEntry();
-        _logger.LogTrace("Raw outbox payload: {}", JsonSerializer.Serialize(outboxEvent));
-
-        if (!outboxEvent.Changes.Any())
-        {
-          return;
-        }
-
-        var messages = MapToMessages(outboxEvent);
-        _logger.LogInformation("Generated {Count} messages from outbox event", messages.Count());
-
-        foreach (var message in messages)
-        {
-          _redisClient.Publish("stream__core", message);
-          _logger.LogInformation("Published {EventType} event", message.Type);
-          _logger.LogTrace("Raw message payload: {}", JsonSerializer.Serialize(message));
-        }
-
-        _logger.LogInformation("Finished broadcasting latest outbox message");
+        _logger.LogTrace("Raw outbox entry content: {}", JsonSerializer.Serialize(outboxEntry));
       }
-      catch (System.Exception)
+
+      if (!outboxEntry.Changes.Any())
       {
-        throw;
+        return;
+      }
+
+      var messages = ConvertToQueueMessages(outboxEntry);
+      _logger.LogInformation("Generated {Count} messages from outbox event", messages.Count());
+
+      foreach (var message in messages)
+      {
+        _queuePublisher.Publish(message);
+        _logger.LogInformation("Published {EventType} event", message["Type"]);
+
+        if (_logger.IsEnabled(LogLevel.Trace))
+        {
+          _logger.LogTrace("Raw queue message: {}", JsonSerializer.Serialize(message));
+        }
       }
     }
 
-    private static IEnumerable<QueueMessageData> MapToMessages(OutboxEntryData outboxData)
+    private static IEnumerable<Dictionary<string, string>> ConvertToQueueMessages(OutboxEntryContent outboxData)
     {
-      return (IEnumerable<QueueMessageData>)outboxData.Changes
-        .Select(static change =>
-        {
-          var payloadDict = change.ColumnNames.Zip(change.ColumnValues).ToDictionary(entry => entry.First, entry => entry.Second);
-          var payloadObj = JsonSerializer.Deserialize<object>(JsonSerializer.Serialize(payloadDict));
+      return outboxData.Changes
+        .Where(c => c.ColumnNames.Length > 0)
+        .Select(change => ConvertToQueueMessage(change));
+    }
 
-          return payloadObj == null
-            ? null
-            : new QueueMessageData() { Type = $"{change.Table}_{change.Kind}", Payload = payloadObj };
-        })
-        .Where(static m => m != null);
+    private static Dictionary<string, string> ConvertToQueueMessage(OutboxEntryChange change)
+    {
+      return change.ColumnNames.Prepend("Type")
+        .Zip(change.ColumnValues.Prepend($"{change.Table}_{change.Kind}"))
+        .Where(e => e.Second != null)
+        .ToDictionary(e => e.First.ToString(), e => e.Second.ToString()) as Dictionary<string, string>;
     }
   }
 }

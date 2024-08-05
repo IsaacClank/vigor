@@ -12,10 +12,10 @@ namespace User.Database
         .Any();
     }
 
-    public OutboxEntryData GetLatestOutboxEntry()
+    public OutboxEntryContent GetLatestOutboxEntry()
     {
       var result = Database.SqlQueryRaw<string>($"SELECT data as \"Value\" FROM pg_logical_slot_get_changes('outbox', null, 1)").Single();
-      return JsonSerializer.Deserialize<OutboxEntryData>(result) ?? throw new JsonException("Cannot deserialize outbox payload");
+      return JsonSerializer.Deserialize<OutboxEntryContent>(result) ?? throw new JsonException("Cannot deserialize outbox payload");
     }
   }
 }

@@ -7,7 +7,7 @@ public class QueuePublisher(QueueClient queue, string stream) : IQueuePublisher
   private readonly QueueClient _queue = queue;
   private readonly string _stream = stream;
 
-  public void Publish(Dictionary<string, object> message)
+  public void Publish(Dictionary<string, string> message)
   {
     NameValueEntry[] content = [];
 

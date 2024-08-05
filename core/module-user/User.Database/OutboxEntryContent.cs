@@ -2,9 +2,9 @@ using System.Text.Json.Serialization;
 
 namespace User.Database
 {
-  public class OutboxEntryData
+  public class OutboxEntryContent
   {
     [JsonPropertyName("change")]
-    public IEnumerable<OutboxEntryDataChange> Changes { get; set; } = [];
+    public IEnumerable<OutboxEntryChange> Changes { get; set; } = [];
   }
 }

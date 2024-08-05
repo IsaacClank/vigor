@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace User.Database
 {
-  public class OutboxEntryDataChange
+  public class OutboxEntryChange
   {
     [JsonPropertyName("kind")]
     public string Kind { get; set; } = string.Empty;
