@@ -1,7 +1,7 @@
 using System.Text.Json;
 using User.Common.Queue;
 
-namespace User.Api.Queue;
+namespace User.Api.Queue.Jobs;
 
 public class Consumer(ILogger<Consumer> logger, IQueueConsumer queue) : BackgroundService
 {

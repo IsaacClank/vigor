@@ -1,6 +1,6 @@
-namespace User.Api.Queue.Configuration;
+namespace User.Api.Queue;
 
-public class QueueConsumerConfiguration
+public class ConsumerOptions
 {
   public required string Stream { get; set; }
   public required string Group { get; set; }
