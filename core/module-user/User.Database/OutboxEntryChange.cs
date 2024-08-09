@@ -18,5 +18,10 @@ namespace User.Database
 
     [JsonPropertyName("columnvalues")]
     public object[] ColumnValues { get; set; } = [];
+
+    public Dictionary<string, string> ToDictionary() => ColumnNames.Prepend("Type")
+      .Zip(ColumnValues.Prepend($"{Table}_{Kind}"))
+      .Where(e => e.Second != null)
+      .ToDictionary(e => e.First.ToString(), e => e.Second.ToString()) as Dictionary<string, string>;
   }
 }
