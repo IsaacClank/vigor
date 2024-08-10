@@ -4,7 +4,7 @@ using User.Common.Queue;
 
 namespace User.Database.Broadcast
 {
-  public class DatabaseBroadcaster(
+  public partial class DatabaseBroadcaster(
       ILogger<DatabaseBroadcaster> logger,
       IDbContextFactory<UserDbContext> dbContextFactory,
       IQueuePublisher queuePublisher) : BackgroundService
@@ -29,44 +29,46 @@ namespace User.Database.Broadcast
       {
         return;
       }
-      else
-      {
-        _logger.LogInformation("Detected outbox event");
-      }
 
       var outboxEntry = db.NextOutboxEvent();
-      if (_logger.IsEnabled(LogLevel.Trace))
-      {
-        _logger.LogTrace("Raw outbox entry content: {}", JsonSerializer.Serialize(outboxEntry));
-      }
-      if (!outboxEntry.Changes.Any())
+      if (outboxEntry == null || !outboxEntry.Changes.Any())
       {
         return;
       }
 
-      var messages = ConvertToQueueMessages(outboxEntry);
-      _logger.LogInformation("Generated {Count} messages from outbox event", messages.Count());
+      LogDetectOutboxEvent(outboxEntry.Changes.Count());
+      LogRawOutboxEventContent(JsonSerializer.Serialize(outboxEntry.Changes));
+
+      var messages = (IEnumerable<Dictionary<string, string>>)outboxEntry
+          .Changes
+          .Where(c => c.ColumnNames.Length > 0)
+          .Select(c => c.ToDictionary());
+
+      LogNumberOfGeneratedMessages(messages.Count());
 
       foreach (var message in messages)
       {
         _queuePublisher.Publish(message);
-        _logger.LogInformation("Published {EventType} event", message["Type"]);
-        if (_logger.IsEnabled(LogLevel.Trace))
-        {
-          _logger.LogTrace("Raw queue message: {}", JsonSerializer.Serialize(message));
-        }
+        LogRawMessage(message);
+        LogPublishedMessageType(message["Type"]);
       }
     }
 
-    private static IEnumerable<Dictionary<string, string>> ConvertToQueueMessages(OutboxEntryContent outboxData) => outboxData
-      .Changes
-      .Where(c => c.ColumnNames.Length > 0)
-      .Select(change => ConvertToQueueMessage(change));
+    #region Loggers
+    [LoggerMessage(Level = LogLevel.Information, Message = "Detected outbox event with {Count} changes.")]
+    private partial void LogDetectOutboxEvent(int count);
 
-    private static Dictionary<string, string> ConvertToQueueMessage(OutboxEntryChange change) => change
-      .ColumnNames.Prepend("Type")
-      .Zip(change.ColumnValues.Prepend($"{change.Table}_{change.Kind}"))
-      .Where(e => e.Second != null)
-      .ToDictionary(e => e.First.ToString(), e => e.Second.ToString()) as Dictionary<string, string>;
+    [LoggerMessage(Level = LogLevel.Trace, Message = "Raw outbox event: {Content}")]
+    private partial void LogRawOutboxEventContent(string content);
+
+    [LoggerMessage(Level = LogLevel.Information, Message = "Generated {Count} messages from outbox event.")]
+    private partial void LogNumberOfGeneratedMessages(int count);
+
+    [LoggerMessage(Level = LogLevel.Information, Message = "Published {MessageType}.")]
+    private partial void LogPublishedMessageType(string messageType);
+
+    [LoggerMessage(Level = LogLevel.Trace, Message = "Raw queue message: {Content}")]
+    private partial void LogRawMessage(Dictionary<string, string> content);
+    #endregion
   }
 }
