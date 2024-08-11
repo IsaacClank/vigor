@@ -1,10 +1,3 @@
-# Common
-**/.env
-
-# VSCode artifacts
-**/*.code-workspace
-
-# .NET artifacts
-**/obj/
-**/bin/
-./*.sln
+*.code-workspace
+*.envrc
+**/appsettings.json
