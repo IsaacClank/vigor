@@ -1,0 +1,9 @@
+services:
+  user_db:
+    build: ./Vigor.Core.User.Db.Docker
+    ports:
+      - 5430:5432
+    environment:
+      - POSTGRES_DB=User
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin-password
