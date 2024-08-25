@@ -1,6 +1,6 @@
-namespace Vigor.Core.User.Db.Models;
+namespace Vigor.Core.Common.Db.Repository;
 
-public abstract class BaseModel
+public abstract class Entity
 {
   public int Id { get; set; }
   public DateTime CreatedAt { get; set; }

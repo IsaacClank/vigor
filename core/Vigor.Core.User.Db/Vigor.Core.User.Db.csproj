@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vigor.Core.Common.Db.PostgreSql\Vigor.Core.Common.Db.PostgreSql.csproj" />
+    <ProjectReference Include="..\Vigor.Core.Common.Db.Repository\Vigor.Core.Common.Db.Repository.csproj" />
   </ItemGroup>
 
 </Project>

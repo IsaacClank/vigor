@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
 using Vigor.Core.Common.Db.PostgreSql;
-using Vigor.Core.User.Db.Models;
+using Vigor.Core.User.Db.Model;
 
 namespace Vigor.Core.User.Db;
 
