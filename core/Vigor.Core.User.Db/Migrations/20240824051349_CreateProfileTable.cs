@@ -19,12 +19,6 @@ public partial class CreateProfileTable : Migration
           updated_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
         },
         constraints: table => table.PrimaryKey("pk_profile", x => x.id));
-
-    migrationBuilder.CreateIndex(
-        name: "ix_profile_type",
-        table: "profile",
-        column: "type",
-        unique: true);
   }
 
   protected override void Down(MigrationBuilder migrationBuilder)

@@ -42,10 +42,6 @@ partial class CreateProfileTable
           b.HasKey("Id")
                     .HasName("pk_profile");
 
-          b.HasIndex("Type")
-                    .IsUnique()
-                    .HasDatabaseName("ix_profile_type");
-
           b.ToTable("profile", (string)null);
         });
   }
