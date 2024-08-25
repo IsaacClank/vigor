@@ -10,18 +10,11 @@ on:
 
 jobs:
   build-and-test:
-    name: Build and test ${{ matrix.solution }}
-    strategy:
-      matrix:
-        solution:
-          - Core
-        include:
-            - solution: Core
-              path: core/
+    name: Build and test
     uses: ./.github/workflows/_build-and-test-dotnet-solution.yml
     with:
       dotnet-version: 8.0.x
-      dotnet-solution-path: ${{ matrix.path }}
+      dotnet-solution-path: ./
 
   analyze:
     name: Discover ${{ matrix.language }} vunerabilities

@@ -6,7 +6,7 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddUserDbContext(builder.Configuration.GetConnectionString("UserDatabase"));
+builder.Services.AddUserDbContext(builder.Configuration.GetConnectionString("UserDb"));
 builder.Services.AddScopedUnitOfWork(provider => provider.GetRequiredService<UserDbContext>());
 builder.Services.AddAutoMapper(config => config.AddMaps(Assembly.GetExecutingAssembly()));
 
