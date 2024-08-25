@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.User.Api.Http", "Vigor.Core.User.Api.Http\Vigor.Core.User.Api.Http.csproj", "{80F6DBB0-1217-42F9-A599-5E3D5BFBDBF2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Common.Db.Repository", "Vigor.Core.Common.Db.Repository\Vigor.Core.Common.Db.Repository.csproj", "{C8A7299B-52BF-4590-9824-51984CB9F5CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Common.Http.Response", "Vigor.Core.Common.Http.Response\Vigor.Core.Common.Http.Response.csproj", "{F897BF3E-ADF3-4202-ADB2-0BCB63A90689}"
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
@@ -114,5 +116,17 @@ Global
 		{C8A7299B-52BF-4590-9824-51984CB9F5CF}.Release|x64.Build.0 = Release|Any CPU
 		{C8A7299B-52BF-4590-9824-51984CB9F5CF}.Release|x86.ActiveCfg = Release|Any CPU
 		{C8A7299B-52BF-4590-9824-51984CB9F5CF}.Release|x86.Build.0 = Release|Any CPU
+		{F897BF3E-ADF3-4202-ADB2-0BCB63A90689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F897BF3E-ADF3-4202-ADB2-0BCB63A90689}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F897BF3E-ADF3-4202-ADB2-0BCB63A90689}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F897BF3E-ADF3-4202-ADB2-0BCB63A90689}.Debug|x64.Build.0 = Debug|Any CPU
+		{F897BF3E-ADF3-4202-ADB2-0BCB63A90689}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F897BF3E-ADF3-4202-ADB2-0BCB63A90689}.Debug|x86.Build.0 = Debug|Any CPU
+		{F897BF3E-ADF3-4202-ADB2-0BCB63A90689}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F897BF3E-ADF3-4202-ADB2-0BCB63A90689}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F897BF3E-ADF3-4202-ADB2-0BCB63A90689}.Release|x64.ActiveCfg = Release|Any CPU
+		{F897BF3E-ADF3-4202-ADB2-0BCB63A90689}.Release|x64.Build.0 = Release|Any CPU
+		{F897BF3E-ADF3-4202-ADB2-0BCB63A90689}.Release|x86.ActiveCfg = Release|Any CPU
+		{F897BF3E-ADF3-4202-ADB2-0BCB63A90689}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
