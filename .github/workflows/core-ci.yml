@@ -14,16 +14,10 @@ jobs:
     strategy:
       matrix:
         solution:
-          - Auth
-          - Contract
-          - User
+          - Core
         include:
-            - solution: Auth
-              path: core/module-auth
-            - solution: Contract
-              path: core/module-contract
-            - solution: User
-              path: core/module-user
+            - solution: Core
+              path: core/
     uses: ./.github/workflows/_build-and-test-dotnet-solution.yml
     with:
       dotnet-version: 8.0.x
