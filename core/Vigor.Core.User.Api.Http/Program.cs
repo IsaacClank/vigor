@@ -1,23 +1,28 @@
 using Vigor.Core.User.Db.Extensions.DependencyInjection;
+using Vigor.Core.Common.Db.Repository.Extensions.DependencyInjection;
+using Vigor.Core.User.Db;
+using Vigor.Core.User.Api.Http.Services;
+using System.Reflection;
 
-namespace Vigor.Core.User.Api.Http
-{
-  public static class Program
-  {
-    public static void Main(string[] args)
-    {
-      var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
-      // Add services to the container.
-      builder.Services.AddUserDbContext(builder.Configuration.GetConnectionString("UserDatabase"));
-      builder.Services.AddControllers();
-      builder.Services.AddSwaggerGen();
+builder.Services.AddUserDbContext(builder.Configuration.GetConnectionString("UserDatabase"));
+builder.Services.AddScopedUnitOfWork(provider => provider.GetRequiredService<UserDbContext>());
+builder.Services.AddAutoMapper(config => config.AddMaps(Assembly.GetExecutingAssembly()));
 
-      var app = builder.Build();
-      app.UseSwagger();
-      app.UseSwaggerUI();
-      app.MapControllers();
-      app.Run();
-    }
-  }
-}
+#region Business Logic
+builder.Services.AddScoped<IProfileService, ProfileService>();
+#endregion
+
+builder.Services.AddControllers();
+builder.Services.AddSwaggerGen(
+  o => o.IncludeXmlComments(
+    Path.Combine(
+      AppContext.BaseDirectory,
+      $"{Assembly.GetExecutingAssembly().GetName().Name}.xml")));
+
+var app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI();
+app.MapControllers();
+app.Run();

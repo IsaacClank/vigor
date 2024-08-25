@@ -7,9 +7,12 @@
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisLevel>latest-Recommended</AnalysisLevel>
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -18,7 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
-  <ProjectReference Include="..\Vigor.Core.User.Db\Vigor.Core.User.Db.csproj" />
+    <ProjectReference Include="..\Vigor.Core.User.Db\Vigor.Core.User.Db.csproj" />
+    <ProjectReference Include="..\Vigor.Core.Common.Db.Repository\Vigor.Core.Common.Db.Repository.csproj" />
+    <ProjectReference Include="..\Vigor.Core.Common.Http.Response\Vigor.Core.Common.Http.Response.csproj" />
+    <ProjectReference Include="..\Vigor.Core.Common.Exception\Vigor.Core.Common.Exception.csproj" />
   </ItemGroup>
 
 </Project>
