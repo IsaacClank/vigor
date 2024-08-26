@@ -7,3 +7,11 @@ services:
       - POSTGRES_DB=$USER_DB_NAME
       - POSTGRES_USER=$USER_DB_USERNAME
       - POSTGRES_PASSWORD=$USER_DB_PASSWORD
+  program_db:
+    build: ./Vigor.Core.Program.Db.Docker
+    ports:
+      - 5431:5432
+    environment:
+      - POSTGRES_DB=$PROGRAM_DB_NAME
+      - POSTGRES_USER=$PROGRAM_DB_USERNAME
+      - POSTGRES_PASSWORD=$PROGRAM_DB_PASSWORD
