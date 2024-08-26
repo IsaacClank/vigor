@@ -6,6 +6,12 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@mail.com
       - PGADMIN_DEFAULT_PASSWORD=admin-password
+      
+  queue:
+    build: ./Vigor.Core.Queue.Docker
+    env_file: ./Vigor.Core.Queue.Docker/.env
+    ports:
+      - 6379:6379
 
   user_db:
     build: ./Vigor.Core.User.Db.Docker
@@ -15,6 +21,7 @@ services:
       - POSTGRES_DB=$USER_DB_NAME
       - POSTGRES_USER=$USER_DB_USERNAME
       - POSTGRES_PASSWORD=$USER_DB_PASSWORD
+
   program_db:
     build: ./Vigor.Core.Program.Db.Docker
     ports:
