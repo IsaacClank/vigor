@@ -25,7 +25,7 @@ builder.Services.AddSingletonRedisStreamConsumer(provider =>
 });
 #endregion
 
-builder.Services.AddHostedService<Worker>();
+builder.Services.AddHostedService<QueueConsumer>();
 
 var host = builder.Build();
 host.Run();
