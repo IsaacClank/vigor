@@ -1,4 +1,5 @@
 using Vigor.Core.Common.Queue.Redis.Exceptions;
+using Vigor.Core.Common.Queue.Redis.Options;
 
 namespace Vigor.Core.Common.Queue.Redis;
 
@@ -62,11 +63,4 @@ public class RedisStreamConsumer
       Values = message.Values.ToDictionary(x => x.Name.ToString(), x => x.Value.ToString())
     };
   }
-}
-
-public class RedisStreamConsumerOptions
-{
-  public string Stream { get; set; } = string.Empty;
-  public string Group { get; set; } = string.Empty;
-  public string Consumer { get; set; } = string.Empty;
 }

@@ -1,5 +1,7 @@
 using StackExchange.Redis;
 
+using Vigor.Core.Common.Queue.Redis.Options;
+
 namespace Vigor.Core.Common.Queue.Redis;
 
 public class RedisStreamPublisher(RedisClient redisClient, RedisStreamPublisherOptions options)
@@ -18,9 +20,4 @@ public class RedisStreamPublisher(RedisClient redisClient, RedisStreamPublisherO
 
     _redisClient.Connection.StreamAdd(_options.Stream, content.ToArray());
   }
-}
-
-public class RedisStreamPublisherOptions
-{
-  public string Stream { get; set; } = string.Empty;
 }
