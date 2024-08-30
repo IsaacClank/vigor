@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Db", "Vi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Db.Broadcast", "Vigor.Core.Program.Db.Broadcast\Vigor.Core.Program.Db.Broadcast.csproj", "{88F11281-225E-438E-8E0C-640BD50DD4FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Api.Queue", "Vigor.Core.Program.Api.Queue\Vigor.Core.Program.Api.Queue.csproj", "{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -170,5 +172,17 @@ Global
 		{88F11281-225E-438E-8E0C-640BD50DD4FA}.Release|x64.Build.0 = Release|Any CPU
 		{88F11281-225E-438E-8E0C-640BD50DD4FA}.Release|x86.ActiveCfg = Release|Any CPU
 		{88F11281-225E-438E-8E0C-640BD50DD4FA}.Release|x86.Build.0 = Release|Any CPU
+		{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}.Debug|x64.Build.0 = Debug|Any CPU
+		{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}.Debug|x86.Build.0 = Debug|Any CPU
+		{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}.Release|x64.ActiveCfg = Release|Any CPU
+		{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}.Release|x64.Build.0 = Release|Any CPU
+		{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}.Release|x86.ActiveCfg = Release|Any CPU
+		{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
