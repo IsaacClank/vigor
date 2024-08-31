@@ -18,10 +18,11 @@ public class ProfileController(IProfileService profileService) : ControllerBase
   /// </summary>
   ///<returns></returns>
   [HttpPost]
-  [ProducesResponseType(StatusCodes.Status200OK)]
-  public ActionResult<ApiResponse<Profile>> Create([FromBody] CreateProfile data)
+  [ProducesResponseType<ApiResponse<Profile>>(StatusCodes.Status200OK)]
+  public IActionResult Create([FromBody] CreateProfile data)
   {
-    return new ApiResponse<Profile>(ProfileService.Create(data));
+    var response = new ApiResponse<Profile>(ProfileService.Create(data));
+    return Ok(response);
   }
 
   /// <summary>
@@ -30,17 +31,18 @@ public class ProfileController(IProfileService profileService) : ControllerBase
   /// <param name="id"></param>
   /// <returns></returns>
   [HttpGet("{id}")]
-  [ProducesResponseType(StatusCodes.Status200OK)]
-  [ProducesResponseType<ApiResponse>(StatusCodes.Status404NotFound)]
-  public ActionResult<ApiResponse<Profile>> Find([FromRoute] int id)
+  [ProducesResponseType<ApiResponse<Profile>>(StatusCodes.Status200OK)]
+  [ProducesResponseType<ApiErrorResponse>(StatusCodes.Status404NotFound)]
+  public IActionResult Find([FromRoute] int id)
   {
     try
     {
-      return new ApiResponse<Profile>(ProfileService.Find(id));
+      var response = new ApiResponse<Profile>(ProfileService.Find(id));
+      return Ok(response);
     }
     catch (EntityNotFoundException<Profile> e)
     {
-      return NotFound(new ApiResponse(e));
+      return NotFound(new ApiErrorResponse(e));
     }
   }
 }
