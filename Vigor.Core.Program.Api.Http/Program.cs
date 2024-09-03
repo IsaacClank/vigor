@@ -1,7 +1,8 @@
-using Vigor.Core.Common.Db.Repository.Extensions.DependencyInjection;
-using Vigor.Core.Program.Db.Extensions.DependencyInjection;
 using System.Reflection;
+
+using Vigor.Core.Common.Db.Repository.Extensions.DependencyInjection;
 using Vigor.Core.Program.Db;
+using Vigor.Core.Program.Db.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
