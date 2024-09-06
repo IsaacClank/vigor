@@ -1,0 +1,30 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "program",
+            "Group": "Servers",
+            "Host": "program_db",
+            "Port": 5432,
+            "MaintenanceDB": "program",
+            "Username": "admin",
+            "TunnelPort": "22",
+            "KerberosAuthentication": false,
+            "ConnectionParameters": {
+                "sslmode": "prefer"
+            }
+        },
+        "2": {
+            "Name": "user",
+            "Group": "Servers",
+            "Host": "user_db",
+            "Port": 5432,
+            "MaintenanceDB": "user",
+            "Username": "admin",
+            "TunnelPort": "22",
+            "KerberosAuthentication": false,
+            "ConnectionParameters": {
+                "sslmode": "prefer"
+            }
+        }
+    }
+}

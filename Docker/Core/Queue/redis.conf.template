@@ -1013,13 +1013,10 @@ replica-priority 100
 #
 # For more information about ACL configuration please refer to
 # the Redis web site at https://redis.io/docs/latest/operate/oss_and_stack/management/security/acl/.
-user module__auth__db_dispatcher reset on +ECHO +XADD %W~*stream__core* >${MOD_AUTH_DB_DISPATCHER_PASSWORD}
-user module__auth__queue_consumer reset on +ECHO +XREADGROUP ~*stream__core* >${MOD_AUTH_QUEUE_CONSUMER_PASSWORD}
-user module__contract__db_dispatcher reset on +ECHO +XADD %W~*stream__core* >${MOD_CONTRACT_DB_DISPATCHER_PASSWORD}
-user module__contract__queue_consumer reset on +ECHO +XREADGROUP ~*stream__core* >${MOD_CONTRACT_QUEUE_CONSUMER_PASSWORD}
-user module__user__db_dispatcher reset on +ECHO +XADD %W~*stream__core* >${MOD_USER_DB_DISPATCHER_PASSWORD}
-# user module__user__queue_consumer reset on +ECHO +XGROUP|CREATE +XREADGROUP >${MOD_USER_QUEUE_CONSUMER_PASSWORD}
-user module__user__queue_consumer reset on +@all ~* >${MOD_USER_QUEUE_CONSUMER_PASSWORD}
+user program_db-dispatcher reset on +@all ~* >${MOD_PROGRAM_DB_DISPATCHER_PASSWORD}
+user program_queue-consumer reset on +@all ~* >${MOD_PROGRAM_QUEUE_CONSUMER_PASSWORD}
+user user_db-dispatcher reset on +@all ~* >${MOD_USER_DB_DISPATCHER_PASSWORD}
+user user_queue-consumer reset on +@all ~* >${MOD_USER_QUEUE_CONSUMER_PASSWORD}
 
 # ACL LOG
 #

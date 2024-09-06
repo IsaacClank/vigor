@@ -1,32 +1,46 @@
 services:
-  pgadmin:
-    build: ./Vigor.Tool.PgAdmin
+  keycloak:
+    build: ./Docker/Keycloak
+    command: start-dev
     ports:
-      - 81:80
+      - 2000:8080
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+
+  pgadmin:
+    build: ./Docker/PgAdmin
+    ports:
+      - 2001:80
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@mail.com
-      - PGADMIN_DEFAULT_PASSWORD=admin-password
+      - PGADMIN_DEFAULT_PASSWORD=admin
       
   queue:
-    build: ./Vigor.Core.Queue.Docker
-    env_file: ./Vigor.Core.Queue.Docker/.env
+    build: ./Docker/Core/Queue
     ports:
-      - 6379:6379
-
-  user_db:
-    build: ./Vigor.Core.User.Db.Docker
-    ports:
-      - 5430:5432
+      - $CORE_BUS_HOST_PORT:6379
     environment:
-      - POSTGRES_DB=$USER_DB_NAME
-      - POSTGRES_USER=$USER_DB_USERNAME
-      - POSTGRES_PASSWORD=$USER_DB_PASSWORD
+      - ADMIN_PASSWORD=$CORE_BUS_DEFAULT_PASSWORD
+      - MOD_PROGRAM_DB_DISPATCHER_PASSWORD=$CORE_BUS_PROGRAM_DB_DISPATCHER_PASSWORD
+      - MOD_PROGRAM_QUEUE_CONSUMER_PASSWORD=$CORE_BUS_PROGRAM_QUEUE_CONSUMER_PASSWORD
+      - MOD_USER_DB_DISPATCHER_PASSWORD=$CORE_BUS_USER_DB_DISPATCHER_PASSWORD
+      - MOD_USER_QUEUE_CONSUMER_PASSWORD=$CORE_BUS_USER_QUEUE_CONSUMER_PASSWORD
 
   program_db:
-    build: ./Vigor.Core.Program.Db.Docker
+    build: ./Docker/Core/Program/Db
     ports:
-      - 5431:5432
+      - $PROGRAM_DB_HOST_PORT:5432
     environment:
       - POSTGRES_DB=$PROGRAM_DB_NAME
       - POSTGRES_USER=$PROGRAM_DB_USERNAME
       - POSTGRES_PASSWORD=$PROGRAM_DB_PASSWORD
+
+  user_db:
+    build: ./Docker/Core/User/Db
+    ports:
+      - $USER_DB_HOST_PORT:5432
+    environment:
+      - POSTGRES_DB=$USER_DB_NAME
+      - POSTGRES_USER=$USER_DB_USERNAME
+      - POSTGRES_PASSWORD=$USER_DB_PASSWORD

@@ -1,5 +1,6 @@
 {
   "preferences": {
+    "browser:display:show_empty_coll_nodes": false,
     "misc:themes:theme": "dark"
   }
 }
