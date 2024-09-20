@@ -1,18 +1,24 @@
+using System.Security.Claims;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-using Vigor.Core.Common.Http.Response;
+using Vigor.Common.Extensions.AspNetCore;
+
+using JsonApi = Vigor.Common.JsonApi;
 
 namespace Vigor.Core.Program.Api.Http.Controllers;
 
-[Route("api")]
+[Authorize]
 [ApiController]
-public class Controller : ControllerBase
+[Route("api")]
+public class Controller : JsonApiController
 {
   [HttpGet]
-  [ProducesResponseType<ApiResponse<Dictionary<string, string>>>(StatusCodes.Status200OK)]
+  [ProducesResponseType<JsonApi.Document<Contracts.Response.Message>>(StatusCodes.Status200OK)]
   public IActionResult Get()
   {
-    Dictionary<string, string> response = new() { { "message", "Hello" } };
-    return Ok(new ApiResponse<Dictionary<string, string>>(response));
+    var x = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value ?? string.Empty;
+    return Ok<Contracts.Response.Message>(new() { Content = $"Hello {x}" });
   }
 }

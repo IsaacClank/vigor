@@ -1,10 +1,12 @@
 using System.Reflection;
 
+using Vigor.Core.Common.Auth.Keycloak.Extensions.DependencyInjection;
 using Vigor.Core.Common.Db.Repository.Extensions.DependencyInjection;
 using Vigor.Core.Program.Db;
 using Vigor.Core.Program.Db.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddBasicKeycloakJwtAuthentication(builder.Configuration);
 
 builder.Services.AddProgramDbContext(builder.Configuration.GetConnectionString("ProgramDb"));
 builder.Services.AddScopedUnitOfWork(provider => provider.GetRequiredService<ProgramDbContext>());
@@ -17,6 +19,8 @@ builder.Services.AddSwaggerGen(o => o.IncludeXmlComments(
       $"{Assembly.GetExecutingAssembly().GetName().Name}.xml")));
 
 var app = builder.Build();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseSwagger();
 app.UseSwaggerUI();
