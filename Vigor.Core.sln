@@ -20,8 +20,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Api.Queue", "Vigor.Core.Program.Api.Queue\Vigor.Core.Program.Api.Queue.csproj", "{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Api.Http", "Vigor.Core.Program.Api.Http\Vigor.Core.Program.Api.Http.csproj", "{185097B8-53D7-4672-8843-FE16F555C289}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.JsonApi", "Vigor.Common.JsonApi\Vigor.Common.JsonApi.csproj", "{42DE5BA3-00A8-45F0-AAF8-87BE6052C133}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Extensions.AspNetCore", "Vigor.Common.Extensions.AspNetCore\Vigor.Common.Extensions.AspNetCore.csproj", "{C3716A9C-D739-42BF-9FF2-BB66D2122A80}"
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
@@ -168,5 +170,17 @@ Global
 		{42DE5BA3-00A8-45F0-AAF8-87BE6052C133}.Release|x64.Build.0 = Release|Any CPU
 		{42DE5BA3-00A8-45F0-AAF8-87BE6052C133}.Release|x86.ActiveCfg = Release|Any CPU
 		{42DE5BA3-00A8-45F0-AAF8-87BE6052C133}.Release|x86.Build.0 = Release|Any CPU
+		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Debug|x64.Build.0 = Debug|Any CPU
+		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Debug|x86.Build.0 = Debug|Any CPU
+		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Release|x64.ActiveCfg = Release|Any CPU
+		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Release|x64.Build.0 = Release|Any CPU
+		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Release|x86.ActiveCfg = Release|Any CPU
+		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
