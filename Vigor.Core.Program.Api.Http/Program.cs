@@ -15,8 +15,8 @@ builder.Services.AddAutoMapper(config => config.AddMaps(Assembly.GetExecutingAss
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(o => o.IncludeXmlComments(
   Path.Combine(
-      AppContext.BaseDirectory,
-      $"{Assembly.GetExecutingAssembly().GetName().Name}.xml")));
+    AppContext.BaseDirectory,
+    $"{Assembly.GetExecutingAssembly().GetName().Name}.xml")));
 
 var app = builder.Build();
 app.UseAuthentication();

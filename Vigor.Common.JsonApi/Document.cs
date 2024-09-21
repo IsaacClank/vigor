@@ -1,6 +1,6 @@
 namespace Vigor.Common.JsonApi;
 
-public class Document<T>(T contract) where T : ContractBase
+public class Document<T> where T : ContractBase
 {
-  public DocumentData<T> Data { get; set; } = new(contract);
+  public IEnumerable<DocumentDataEntry<T>> Data { get; set; } = [];
 }
