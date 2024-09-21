@@ -11,20 +11,16 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vigor.Core.Program.Db\Vigor.Core.Program.Db.csproj" />
-    <ProjectReference Include="..\Vigor.Common.Db.Repository\Vigor.Common.Db.Repository.csproj" />
-    <ProjectReference Include="..\Vigor.Core.Common.Exception\Vigor.Core.Common.Exception.csproj" />
     <ProjectReference Include="..\Vigor.Common.Auth.Keycloak\Vigor.Common.Auth.Keycloak.csproj" />
-    <ProjectReference Include="..\Vigor.Common.JsonApi\Vigor.Common.JsonApi.csproj" />
+    <ProjectReference Include="..\Vigor.Common.Db.Repository\Vigor.Common.Db.Repository.csproj" />
     <ProjectReference Include="..\Vigor.Common.Extensions.AspNetCore\Vigor.Common.Extensions.AspNetCore.csproj" />
+    <ProjectReference Include="..\Vigor.Common.JsonApi\Vigor.Common.JsonApi.csproj" />
+    <ProjectReference Include="..\Vigor.Core.Program.Db\Vigor.Core.Program.Db.csproj" />
+    <ProjectReference Include="..\Vigor.Core.Common.Exception\Vigor.Core.Common.Exception.csproj" />
   </ItemGroup>
 
 </Project>
