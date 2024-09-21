@@ -2,7 +2,11 @@ using System.Linq.Expressions;
 
 namespace Vigor.Common.Db.Repository;
 
-public interface IRepository<TEntity> where TEntity : Entity
+public interface IRepository
+{
+}
+
+public interface IRepository<TEntity> : IRepository where TEntity : Entity
 {
   /// <summary>
   /// Find an entity instance by Id.
