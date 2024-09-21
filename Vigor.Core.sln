@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Extensions.Asp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Db.PostgreSql", "Vigor.Common.Db.PostgreSql\Vigor.Common.Db.PostgreSql.csproj", "{16F781B5-D532-4DF0-94A4-25AF0A0E2185}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Db.Entities", "Vigor.Core.Program.Db.Entities\Vigor.Core.Program.Db.Entities.csproj", "{B45FB87F-6318-47E1-B463-9AEC911108DB}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
