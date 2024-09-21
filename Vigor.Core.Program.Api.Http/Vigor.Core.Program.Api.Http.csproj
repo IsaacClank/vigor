@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Vigor.Common.Extensions.AspNetCore\Vigor.Common.Extensions.AspNetCore.csproj" />
     <ProjectReference Include="..\Vigor.Common.Exception\Vigor.Common.Exception.csproj" />
     <ProjectReference Include="..\Vigor.Core.Program.Db\Vigor.Core.Program.Db.csproj" />
+    <ProjectReference Include="..\Vigor.Core.Program.Domain.Facility\Vigor.Core.Program.Domain.Facility.csproj" />
   </ItemGroup>
 
 </Project>
