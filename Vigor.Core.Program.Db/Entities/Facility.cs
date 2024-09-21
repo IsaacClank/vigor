@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-using Vigor.Core.Common.Db.Repository;
+using Vigor.Common.Db.Repository;
 
 namespace Vigor.Core.Program.Db.Entities;
 

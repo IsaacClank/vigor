@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Common.Db.PostgreSql", "Vigor.Core.Common.Db.PostgreSql\Vigor.Core.Common.Db.PostgreSql.csproj", "{58EF6A8E-6E37-49E1-BCD3-D52E79CC6B0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Queue.Redis", "Vigor.Common.Queue.Redis\Vigor.Common.Queue.Redis.csproj", "{5FA38A76-E7CA-4F2E-BB4C-ED5F57134DC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Common.Queue.Redis", "Vigor.Core.Common.Queue.Redis\Vigor.Core.Common.Queue.Redis.csproj", "{5FA38A76-E7CA-4F2E-BB4C-ED5F57134DC8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Common.Db.Repository", "Vigor.Core.Common.Db.Repository\Vigor.Core.Common.Db.Repository.csproj", "{C8A7299B-52BF-4590-9824-51984CB9F5CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Db.Repository", "Vigor.Common.Db.Repository\Vigor.Common.Db.Repository.csproj", "{C8A7299B-52BF-4590-9824-51984CB9F5CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Common.Exception", "Vigor.Core.Common.Exception\Vigor.Core.Common.Exception.csproj", "{F9356E35-0580-46DA-A7C5-4A82A4998EE4}"
 EndProject
@@ -19,11 +17,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Api.Queu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Api.Http", "Vigor.Core.Program.Api.Http\Vigor.Core.Program.Api.Http.csproj", "{185097B8-53D7-4672-8843-FE16F555C289}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Common.Auth.Keycloak", "Vigor.Core.Common.Auth.Keycloak\Vigor.Core.Common.Auth.Keycloak.csproj", "{A3ADF841-7303-4092-AA08-DDE9F5BEB711}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Auth.Keycloak", "Vigor.Common.Auth.Keycloak\Vigor.Common.Auth.Keycloak.csproj", "{A3ADF841-7303-4092-AA08-DDE9F5BEB711}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.JsonApi", "Vigor.Common.JsonApi\Vigor.Common.JsonApi.csproj", "{42DE5BA3-00A8-45F0-AAF8-87BE6052C133}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Extensions.AspNetCore", "Vigor.Common.Extensions.AspNetCore\Vigor.Common.Extensions.AspNetCore.csproj", "{C3716A9C-D739-42BF-9FF2-BB66D2122A80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Db.PostgreSql", "Vigor.Common.Db.PostgreSql\Vigor.Common.Db.PostgreSql.csproj", "{16F781B5-D532-4DF0-94A4-25AF0A0E2185}"
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
@@ -38,18 +38,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{58EF6A8E-6E37-49E1-BCD3-D52E79CC6B0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{58EF6A8E-6E37-49E1-BCD3-D52E79CC6B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{58EF6A8E-6E37-49E1-BCD3-D52E79CC6B0B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{58EF6A8E-6E37-49E1-BCD3-D52E79CC6B0B}.Debug|x64.Build.0 = Debug|Any CPU
-		{58EF6A8E-6E37-49E1-BCD3-D52E79CC6B0B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{58EF6A8E-6E37-49E1-BCD3-D52E79CC6B0B}.Debug|x86.Build.0 = Debug|Any CPU
-		{58EF6A8E-6E37-49E1-BCD3-D52E79CC6B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{58EF6A8E-6E37-49E1-BCD3-D52E79CC6B0B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{58EF6A8E-6E37-49E1-BCD3-D52E79CC6B0B}.Release|x64.ActiveCfg = Release|Any CPU
-		{58EF6A8E-6E37-49E1-BCD3-D52E79CC6B0B}.Release|x64.Build.0 = Release|Any CPU
-		{58EF6A8E-6E37-49E1-BCD3-D52E79CC6B0B}.Release|x86.ActiveCfg = Release|Any CPU
-		{58EF6A8E-6E37-49E1-BCD3-D52E79CC6B0B}.Release|x86.Build.0 = Release|Any CPU
 		{5FA38A76-E7CA-4F2E-BB4C-ED5F57134DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5FA38A76-E7CA-4F2E-BB4C-ED5F57134DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FA38A76-E7CA-4F2E-BB4C-ED5F57134DC8}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -182,5 +170,17 @@ Global
 		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Release|x64.Build.0 = Release|Any CPU
 		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Release|x86.ActiveCfg = Release|Any CPU
 		{C3716A9C-D739-42BF-9FF2-BB66D2122A80}.Release|x86.Build.0 = Release|Any CPU
+		{16F781B5-D532-4DF0-94A4-25AF0A0E2185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16F781B5-D532-4DF0-94A4-25AF0A0E2185}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16F781B5-D532-4DF0-94A4-25AF0A0E2185}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{16F781B5-D532-4DF0-94A4-25AF0A0E2185}.Debug|x64.Build.0 = Debug|Any CPU
+		{16F781B5-D532-4DF0-94A4-25AF0A0E2185}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{16F781B5-D532-4DF0-94A4-25AF0A0E2185}.Debug|x86.Build.0 = Debug|Any CPU
+		{16F781B5-D532-4DF0-94A4-25AF0A0E2185}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16F781B5-D532-4DF0-94A4-25AF0A0E2185}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16F781B5-D532-4DF0-94A4-25AF0A0E2185}.Release|x64.ActiveCfg = Release|Any CPU
+		{16F781B5-D532-4DF0-94A4-25AF0A0E2185}.Release|x64.Build.0 = Release|Any CPU
+		{16F781B5-D532-4DF0-94A4-25AF0A0E2185}.Release|x86.ActiveCfg = Release|Any CPU
+		{16F781B5-D532-4DF0-94A4-25AF0A0E2185}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

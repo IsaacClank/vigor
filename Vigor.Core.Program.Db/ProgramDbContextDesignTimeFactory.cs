@@ -1,4 +1,4 @@
-using Vigor.Core.Common.Db.PostgreSql;
+using Vigor.Common.Db.PostgreSql;
 
 namespace Vigor.Core.Program.Db;
 

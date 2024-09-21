@@ -1,7 +1,7 @@
 using System.Reflection;
 
-using Vigor.Core.Common.Auth.Keycloak.Extensions.DependencyInjection;
-using Vigor.Core.Common.Db.Repository.Extensions.DependencyInjection;
+using Vigor.Common.Auth.Keycloak.Extensions.DependencyInjection;
+using Vigor.Common.Db.Repository.Extensions.DependencyInjection;
 using Vigor.Core.Program.Db;
 using Vigor.Core.Program.Db.Extensions.DependencyInjection;
 

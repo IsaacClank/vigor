@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Options;
 
-using Vigor.Core.Common.Queue.Redis.Extensions.DependencyInjection;
+using Vigor.Common.Queue.Redis.Extensions.DependencyInjection;
 using Vigor.Core.Program.Api.Queue;
 
 var builder = Host.CreateApplicationBuilder(args);

@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vigor.Core.Common.Queue.Redis\Vigor.Core.Common.Queue.Redis.csproj" />
+    <ProjectReference Include="..\Vigor.Common.Queue.Redis\Vigor.Common.Queue.Redis.csproj" />
     <ProjectReference Include="..\Vigor.Core.Program.Db\Vigor.Core.Program.Db.csproj" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-using Vigor.Core.Common.Db.PostgreSql.Extensions.DependencyInjection;
+using Vigor.Common.Db.PostgreSql.Extensions.DependencyInjection;
 
 namespace Vigor.Core.Program.Db.Extensions.DependencyInjection;
 

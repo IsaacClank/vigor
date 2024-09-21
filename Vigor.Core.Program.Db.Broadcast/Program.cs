@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Options;
 
-using Vigor.Core.Common.Queue.Redis.Extensions.DependencyInjection;
+using Vigor.Common.Queue.Redis.Extensions.DependencyInjection;
 using Vigor.Core.Program.Db.Broadcast;
 using Vigor.Core.Program.Db.Extensions.DependencyInjection;
 

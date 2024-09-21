@@ -20,10 +20,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Vigor.Core.Program.Db\Vigor.Core.Program.Db.csproj" />
-    <ProjectReference Include="..\Vigor.Core.Common.Db.Repository\Vigor.Core.Common.Db.Repository.csproj" />
-    <ProjectReference Include="..\Vigor.Core.Common.Http.Response\Vigor.Core.Common.Http.Response.csproj" />
+    <ProjectReference Include="..\Vigor.Common.Db.Repository\Vigor.Common.Db.Repository.csproj" />
     <ProjectReference Include="..\Vigor.Core.Common.Exception\Vigor.Core.Common.Exception.csproj" />
-    <ProjectReference Include="..\Vigor.Core.Common.Auth.Keycloak\Vigor.Core.Common.Auth.Keycloak.csproj" />
+    <ProjectReference Include="..\Vigor.Common.Auth.Keycloak\Vigor.Common.Auth.Keycloak.csproj" />
     <ProjectReference Include="..\Vigor.Common.JsonApi\Vigor.Common.JsonApi.csproj" />
     <ProjectReference Include="..\Vigor.Common.Extensions.AspNetCore\Vigor.Common.Extensions.AspNetCore.csproj" />
   </ItemGroup>

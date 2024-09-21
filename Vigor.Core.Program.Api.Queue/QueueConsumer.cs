@@ -1,4 +1,4 @@
-using Vigor.Core.Common.Queue.Redis;
+using Vigor.Common.Queue.Redis;
 
 namespace Vigor.Core.Program.Api.Queue;
 
