@@ -16,6 +16,6 @@ public class Facility : Entity
   #endregion
 
   #region External fields
-  public int OwnerId { get; set; }
+  public Guid OwnerId { get; set; }
   #endregion
 }

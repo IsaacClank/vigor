@@ -12,7 +12,7 @@ using Vigor.Core.Program.Db;
 namespace Vigor.Core.Program.Db.Migrations
 {
     [DbContext(typeof(ProgramDbContext))]
-    [Migration("20240830120851_CreateInitialTables")]
+    [Migration("20240921084427_CreateInitialTables")]
     partial class CreateInitialTables
     {
         /// <inheritdoc />
@@ -27,12 +27,12 @@ namespace Vigor.Core.Program.Db.Migrations
 
             modelBuilder.Entity("FacilityProgram", b =>
                 {
-                    b.Property<int>("FacilitiesId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("FacilitiesId")
+                        .HasColumnType("uuid")
                         .HasColumnName("facilities_id");
 
-                    b.Property<int>("ProgramsId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("ProgramsId")
+                        .HasColumnType("uuid")
                         .HasColumnName("programs_id");
 
                     b.HasKey("FacilitiesId", "ProgramsId")
@@ -46,12 +46,10 @@ namespace Vigor.Core.Program.Db.Migrations
 
             modelBuilder.Entity("Vigor.Core.Program.Db.Entities.Facility", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
                         .HasColumnType("jsonb")
@@ -74,6 +72,12 @@ namespace Vigor.Core.Program.Db.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
+                    b.Property<uint>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
+
                     b.HasKey("Id")
                         .HasName("pk_facility");
 
@@ -82,24 +86,28 @@ namespace Vigor.Core.Program.Db.Migrations
 
             modelBuilder.Entity("Vigor.Core.Program.Db.Entities.Membership", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
-                    b.Property<int>("ProgramId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("ProgramId")
+                        .HasColumnType("uuid")
                         .HasColumnName("program_id");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
+
+                    b.Property<uint>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
 
                     b.HasKey("Id")
                         .HasName("pk_membership");
@@ -112,12 +120,10 @@ namespace Vigor.Core.Program.Db.Migrations
 
             modelBuilder.Entity("Vigor.Core.Program.Db.Entities.Program", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -139,6 +145,12 @@ namespace Vigor.Core.Program.Db.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
+
+                    b.Property<uint>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid")
+                        .HasColumnName("xmin");
 
                     b.HasKey("Id")
                         .HasName("pk_program");
