@@ -12,11 +12,11 @@ public class FacilityCrud(IMapper mapper, IUnitOfWork unitOfWork) : IFacilityCru
   private readonly IMapper _mapper = mapper;
   private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-  private IRepository<Db.Models.Facility> FacilityRepository => _unitOfWork.Repository<Db.Models.Facility>();
+  private IRepository<Db.Entities.Facility> FacilityRepository => _unitOfWork.Repository<Db.Entities.Facility>();
 
   public async Task<Contracts.Facility> UpsertAsync(Guid userId, UpsertFacility createFacility)
   {
-    var facility = _mapper.Map<Db.Models.Facility>(createFacility);
+    var facility = _mapper.Map<Db.Entities.Facility>(createFacility);
     facility.OwnerId = userId;
 
     if (facility.Id != Guid.Empty)
