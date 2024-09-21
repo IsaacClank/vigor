@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AnalysisLevel>8-Recommended</AnalysisLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vigor.Common.JsonApi\Vigor.Common.JsonApi.csproj" />
+    <ProjectReference Include="..\Vigor.Core.Program.Db.Entities\Vigor.Core.Program.Db.Entities.csproj" />
+    <ProjectReference Include="..\Vigor.Common.Exception\Vigor.Common.Exception.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+</Project>
