@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Queue.Redis", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Db.Repository", "Vigor.Common.Db.Repository\Vigor.Common.Db.Repository.csproj", "{C8A7299B-52BF-4590-9824-51984CB9F5CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Common.Exception", "Vigor.Core.Common.Exception\Vigor.Core.Common.Exception.csproj", "{F9356E35-0580-46DA-A7C5-4A82A4998EE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Exception", "Vigor.Common.Exception\Vigor.Common.Exception.csproj", "{F9356E35-0580-46DA-A7C5-4A82A4998EE4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Db", "Vigor.Core.Program.Db\Vigor.Core.Program.Db.csproj", "{80073224-B5BA-413A-90F4-1D8E5738F4AD}"
 EndProject
