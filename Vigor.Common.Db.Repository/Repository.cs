@@ -19,13 +19,13 @@ public class Repository<TEntity>(DbContext dbContext) : IRepository<TEntity> whe
   public IEnumerable<TEntity> Find(
     Expression<Func<TEntity, bool>> predicate,
     int limit = int.MaxValue,
-    int offset = 0) => Model.Where(predicate).Take(limit).Skip(offset).ToList();
+    int offset = 0) => Model.Where(predicate).OrderBy(e => e.CreatedAt).Take(limit).Skip(offset).ToList();
 
   /// <inheritdoc/>
   public async Task<IEnumerable<TEntity>> FindAsync(
     Expression<Func<TEntity, bool>> predicate,
     int limit = int.MaxValue,
-    int offset = 0) => await Model.Where(predicate).Take(limit).Skip(offset).ToListAsync();
+    int offset = 0) => await Model.Where(predicate).OrderBy(e => e.CreatedAt).Take(limit).Skip(offset).ToListAsync();
 
   /// <inheritdoc/>
   public IEnumerable<TEntity> Find<TOrderKey>(
