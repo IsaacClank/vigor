@@ -8,4 +8,8 @@ public class Membership : Entity
   public Guid ProgramId { get; set; }
   public Program? Program { get; set; }
   #endregion
+
+  #region External
+  public required Guid OwnerId { get; set; }
+  #endregion
 }

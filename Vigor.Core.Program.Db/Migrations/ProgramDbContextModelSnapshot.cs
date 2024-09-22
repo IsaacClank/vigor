@@ -61,8 +61,8 @@ namespace Vigor.Core.Program.Db.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid")
                         .HasColumnName("owner_id");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -91,6 +91,10 @@ namespace Vigor.Core.Program.Db.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("owner_id");
 
                     b.Property<Guid>("ProgramId")
                         .HasColumnType("uuid")
@@ -135,8 +139,8 @@ namespace Vigor.Core.Program.Db.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid")
                         .HasColumnName("owner_id");
 
                     b.Property<DateTime>("UpdatedAt")
