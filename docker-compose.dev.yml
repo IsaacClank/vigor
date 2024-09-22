@@ -3,7 +3,7 @@ services:
     build: ./Docker/Keycloak
     depends_on:
       - user_db
-    command: start-dev
+    command: start-dev --import-realm
     ports:
       - ${KC_HOST_PORT}:8080
     environment:
@@ -15,6 +15,11 @@ services:
       - KC_DB_URL_DATABASE=$USER_DB_NAME
       - KC_DB_USERNAME
       - KC_DB_PASSWORD
+    volumes:
+      - type: bind
+        source: ./Docker/Keycloak/vigor-dev.json
+        target: /opt/keycloak/data/import/vigor-dev.json
+        read_only: true
 
   pgadmin:
     build: ./Docker/PgAdmin
@@ -23,7 +28,7 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@mail.com
       - PGADMIN_DEFAULT_PASSWORD=admin
-      
+
   queue:
     build: ./Docker/Core/Queue
     ports:
