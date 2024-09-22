@@ -5,6 +5,7 @@ using Vigor.Core.Program.Common.Auth.Keycloak.Extensions.DependencyInjection;
 using Vigor.Core.Program.Db;
 using Vigor.Core.Program.Db.Extensions.DependencyInjection;
 using Vigor.Core.Program.Domain.Facility.Extensions.DependencyInjection;
+using Vigor.Core.Program.Domain.Program.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApiAuthentication(builder.Configuration);
@@ -13,6 +14,7 @@ builder.Services.AddApiAuthorization();
 builder.Services.AddProgramDbContext(builder.Configuration.GetConnectionString("ProgramDb"));
 builder.Services.AddScopedUnitOfWork(provider => provider.GetRequiredService<ProgramDbContext>());
 builder.Services.AddFacilityDomain();
+builder.Services.AddProgramDomain();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(o => o.IncludeXmlComments(

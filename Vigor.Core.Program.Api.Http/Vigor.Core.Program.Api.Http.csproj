@@ -26,6 +26,8 @@
     <ProjectReference Include="..\Vigor.Core.Program.Db\Vigor.Core.Program.Db.csproj" />
     <ProjectReference Include="..\Vigor.Core.Program.Domain.Facility\Vigor.Core.Program.Domain.Facility.csproj" />
     <ProjectReference Include="..\Vigor.Core.Program.Common.Auth.Keycloak\Vigor.Core.Program.Common.Auth.Keycloak.csproj" />
+    <ProjectReference Include="..\Vigor.Core.Program.Domain.Program\Vigor.Core.Program.Domain.Program.csproj" />
+    <ProjectReference Include="..\Vigor.Common.Extensions.System\Vigor.Common.Extensions.System.csproj" />
   </ItemGroup>
 
 </Project>
