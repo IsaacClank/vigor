@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Common.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Extensions.Logging", "Vigor.Common.Extensions.Logging\Vigor.Common.Extensions.Logging.csproj", "{28981062-AF1B-4B06-8523-39AA7DEF64A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Extensions.System", "Vigor.Common.Extensions.System\Vigor.Common.Extensions.System.csproj", "{E9C16A8B-0E6B-453B-96A9-0B8524B2E68D}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -238,5 +240,17 @@ Global
 		{28981062-AF1B-4B06-8523-39AA7DEF64A7}.Release|x64.Build.0 = Release|Any CPU
 		{28981062-AF1B-4B06-8523-39AA7DEF64A7}.Release|x86.ActiveCfg = Release|Any CPU
 		{28981062-AF1B-4B06-8523-39AA7DEF64A7}.Release|x86.Build.0 = Release|Any CPU
+		{E9C16A8B-0E6B-453B-96A9-0B8524B2E68D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9C16A8B-0E6B-453B-96A9-0B8524B2E68D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9C16A8B-0E6B-453B-96A9-0B8524B2E68D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E9C16A8B-0E6B-453B-96A9-0B8524B2E68D}.Debug|x64.Build.0 = Debug|Any CPU
+		{E9C16A8B-0E6B-453B-96A9-0B8524B2E68D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E9C16A8B-0E6B-453B-96A9-0B8524B2E68D}.Debug|x86.Build.0 = Debug|Any CPU
+		{E9C16A8B-0E6B-453B-96A9-0B8524B2E68D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9C16A8B-0E6B-453B-96A9-0B8524B2E68D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9C16A8B-0E6B-453B-96A9-0B8524B2E68D}.Release|x64.ActiveCfg = Release|Any CPU
+		{E9C16A8B-0E6B-453B-96A9-0B8524B2E68D}.Release|x64.Build.0 = Release|Any CPU
+		{E9C16A8B-0E6B-453B-96A9-0B8524B2E68D}.Release|x86.ActiveCfg = Release|Any CPU
+		{E9C16A8B-0E6B-453B-96A9-0B8524B2E68D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
