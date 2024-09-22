@@ -1,5 +1,3 @@
-using System.Security.Claims;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +10,16 @@ namespace Vigor.Core.Program.Api.Http.Controllers;
 [Route("api")]
 public class Controller : JsonApiController
 {
-  [HttpGet("health")]
+  [HttpGet]
   [ProducesResponseType<string>(StatusCodes.Status200OK)]
-  public IActionResult Check()
+  public IActionResult Me()
   {
-    var x = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value ?? string.Empty;
-    return Empty;
+    var nickname = HttpContext.User.Claims.FirstOrDefault(
+      c => c.Type == Keycloak.ClaimTypes.NickName)?.Value ?? string.Empty;
+    return Content($"Hello {nickname}");
   }
+
+  [HttpGet("health")]
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  public IActionResult Check() => Empty;
 }

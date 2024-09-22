@@ -1,13 +1,14 @@
 using System.Reflection;
 
-using Vigor.Common.Auth.Keycloak.Extensions.DependencyInjection;
 using Vigor.Common.Db.Repository.Extensions.DependencyInjection;
+using Vigor.Core.Program.Common.Auth.Keycloak.Extensions.DependencyInjection;
 using Vigor.Core.Program.Db;
 using Vigor.Core.Program.Db.Extensions.DependencyInjection;
 using Vigor.Core.Program.Domain.Facility.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddBasicKeycloakJwtAuthentication(builder.Configuration);
+builder.Services.AddApiAuthentication(builder.Configuration);
+builder.Services.AddApiAuthorization();
 
 builder.Services.AddProgramDbContext(builder.Configuration.GetConnectionString("ProgramDb"));
 builder.Services.AddScopedUnitOfWork(provider => provider.GetRequiredService<ProgramDbContext>());

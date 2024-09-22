@@ -39,4 +39,9 @@ public static class ServiceCollectionExtensions
       };
     });
   }
+
+  public static void AddKeycloakAuthorization(this IServiceCollection services)
+  {
+    services.AddAuthorization();
+  }
 }

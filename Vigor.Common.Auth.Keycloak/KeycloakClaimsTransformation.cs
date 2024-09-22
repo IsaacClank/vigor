@@ -13,43 +13,42 @@ public class KeycloakClaimsTransformation(
   IOptions<KeycloakOptions> options) : IClaimsTransformation
 {
   protected IOptions<KeycloakOptions> Options { get; } = options;
-  protected KeycloakClaimsTransformationOptions TransformationOptions => Options.Value.ClaimsTransformation;
 
   public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
   {
-    TransformUserClientRoleClaim(principal);
+    TransformResourceAccessClaim(principal);
     return Task.FromResult(principal);
   }
 
-  private void TransformUserClientRoleClaim(ClaimsPrincipal principal)
+  private static void TransformResourceAccessClaim(ClaimsPrincipal principal)
   {
-    if (!TransformationOptions.ShouldTransformUserClientRoleClaim
-      || principal.Identity is not ClaimsIdentity identity)
+    if (principal.Identity is not ClaimsIdentity identity)
     {
       return;
     }
 
-    var rawUserClientRoleClaim = identity.FindFirst(TransformationOptions.UserClientRoleClaim);
-    if (rawUserClientRoleClaim is null)
+    var serializedResourceAccessClaim = identity.FindFirst(ClaimTypes.ResourceAccess);
+    if (serializedResourceAccessClaim is null)
     {
       return;
     }
 
-    var userClientRoleClaim = JsonSerializer.Deserialize<UserClientRoleClaimValue>(rawUserClientRoleClaim.Value);
-    if (userClientRoleClaim is null)
+    var resourceAccessClaimValue = JsonSerializer.Deserialize<UserClientRoleClaimValue>(
+      serializedResourceAccessClaim.Value);
+    if (resourceAccessClaimValue is null)
     {
       return;
     }
 
-    foreach (var role in userClientRoleClaim.Roles)
+    foreach (var role in resourceAccessClaimValue.Roles)
     {
       identity.AddClaim(new(
-        ClaimTypes.Role,
+        System.Security.Claims.ClaimTypes.Role,
         role,
         ClaimValueTypes.String,
-        rawUserClientRoleClaim.Issuer,
-        rawUserClientRoleClaim.OriginalIssuer,
-        rawUserClientRoleClaim.Subject));
+        serializedResourceAccessClaim.Issuer,
+        serializedResourceAccessClaim.OriginalIssuer,
+        serializedResourceAccessClaim.Subject));
     }
   }
 }

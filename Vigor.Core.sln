@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Domain.F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Db.Entities", "Vigor.Core.Program.Db.Entities\Vigor.Core.Program.Db.Entities.csproj", "{B45FB87F-6318-47E1-B463-9AEC911108DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Common.Auth.Keycloak", "Vigor.Core.Program.Common.Auth.Keycloak\Vigor.Core.Program.Common.Auth.Keycloak.csproj", "{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -210,5 +212,17 @@ Global
 		{B45FB87F-6318-47E1-B463-9AEC911108DB}.Release|x64.Build.0 = Release|Any CPU
 		{B45FB87F-6318-47E1-B463-9AEC911108DB}.Release|x86.ActiveCfg = Release|Any CPU
 		{B45FB87F-6318-47E1-B463-9AEC911108DB}.Release|x86.Build.0 = Release|Any CPU
+		{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}.Debug|x64.Build.0 = Debug|Any CPU
+		{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}.Debug|x86.Build.0 = Debug|Any CPU
+		{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}.Release|x64.ActiveCfg = Release|Any CPU
+		{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}.Release|x64.Build.0 = Release|Any CPU
+		{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}.Release|x86.ActiveCfg = Release|Any CPU
+		{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

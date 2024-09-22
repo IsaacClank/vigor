@@ -13,6 +13,4 @@ public class KeycloakOptions
   public required string Audience { get; set; }
 
   public bool RequireHttpsMetadata { get; set; } = true;
-
-  public KeycloakClaimsTransformationOptions ClaimsTransformation { get; set; } = new();
 }

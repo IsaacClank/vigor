@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using Vigor.Common.Extensions.AspNetCore;
 using Vigor.Common.JsonApi;
+using Vigor.Core.Program.Common.Auth.Keycloak;
 using Vigor.Core.Program.Domain.Facility.Interfaces;
 
 namespace Vigor.Core.Program.Api.Http.Controllers;
@@ -15,16 +16,7 @@ public class FacilityController(IFacilityCrud facilityCrud) : JsonApiController
 {
   private readonly IFacilityCrud _facilityCrud = facilityCrud;
 
-  [Authorize]
-  [HttpGet("check")]
-  [ProducesResponseType<string>(StatusCodes.Status200OK)]
-  public IActionResult Greeting()
-  {
-    var givenNameClaim = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.GivenName);
-    return Content($"Hello, {givenNameClaim.Value}!");
-  }
-
-  [Authorize(Roles = "program-owner")]
+  [Authorize(Policies.IsFacilityOwner)]
   [HttpPost]
   [ProducesResponseType<Document<Domain.Facility.Contracts.Facility>>(StatusCodes.Status200OK)]
   public async Task<IActionResult> Create([FromBody] Domain.Facility.Contracts.UpsertFacility createFacility)
@@ -35,7 +27,7 @@ public class FacilityController(IFacilityCrud facilityCrud) : JsonApiController
     return Ok(createdFacility);
   }
 
-  [Authorize(Roles = "program-owner")]
+  [Authorize(Policies.IsFacilityOwner)]
   [HttpGet]
   public async Task<IActionResult> FindAsync()
   {
@@ -45,13 +37,13 @@ public class FacilityController(IFacilityCrud facilityCrud) : JsonApiController
     return Ok(results);
   }
 
-  [Authorize(Roles = "program-owner")]
-  [HttpDelete("{facility-id}")]
-  public async Task<IActionResult> Remove([FromRoute(Name = "facility-id")] Guid facilityId)
+  [Authorize(Policies.IsFacilityOwner)]
+  [HttpDelete("{id:guid}")]
+  public async Task<IActionResult> Remove(Guid id)
   {
     var claim = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
     var userId = Guid.Parse(claim);
-    var removedFacility = await _facilityCrud.RemoveAsync(userId, facilityId);
+    var removedFacility = await _facilityCrud.RemoveAsync(userId, facilityId: id);
     return Ok(removedFacility);
   }
 }
