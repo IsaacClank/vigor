@@ -20,22 +20,37 @@ public class FacilityCrud(
   private readonly IMapper _mapper = mapper;
   private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-  private IRepository<Db.Entities.Facility> FacilityRepository => _unitOfWork.Repository<Db.Entities.Facility>();
+  private IRepository<Db.Entities.Facility> FacilityRepository
+    => _unitOfWork.Repository<Db.Entities.Facility>();
 
   public async Task<Contracts.Facility> UpsertAsync(
     Guid userId,
     UpsertFacility upsertFacility)
+    => _mapper.Map<Contracts.Facility>(await UpsertAsync(userId, [upsertFacility]));
+
+  public async Task<IEnumerable<Contracts.Facility>> UpsertAsync(
+    Guid userId,
+    IEnumerable<UpsertFacility> upsertFacilities)
   {
-    var facilityToUpsert = _mapper.Map<Db.Entities.Facility>(upsertFacility);
-    facilityToUpsert.OwnerId = userId;
+    List<Db.Entities.Facility> upsertedFacilities = [];
+    await Parallel.ForEachAsync(upsertFacilities, async (upsertFacility, _) =>
+    {
+      var facilityToUpsert = _mapper.Map<Db.Entities.Facility>(upsertFacility);
+      facilityToUpsert.OwnerId = userId;
 
-    var upsertedFacility = upsertFacility.Id.IsEmptyOrDefault()
-      ? await FacilityRepository.InsertAsync(facilityToUpsert)
-      : FacilityRepository.Update(facilityToUpsert);
+      var upsertedFacility = upsertFacility.Id.IsEmptyOrDefault()
+        ? await FacilityRepository.InsertAsync(facilityToUpsert)
+        : FacilityRepository.Update(facilityToUpsert);
+
+      upsertedFacilities.Add(upsertedFacility);
+    });
+
     await _unitOfWork.SaveAsync();
-    Logger.UpsertedEntity(nameof(Db.Entities.Facility), upsertedFacility.Id);
+    upsertedFacilities.ForEach(f => Logger.UpsertedEntity(
+      nameof(Db.Entities.Facility),
+      f.Id));
 
-    return _mapper.Map<Contracts.Facility>(upsertedFacility);
+    return _mapper.Map<IEnumerable<Contracts.Facility>>(upsertedFacilities);
   }
 
   public async Task<IEnumerable<Contracts.Facility>> FindAsync(Guid userId)
@@ -54,5 +69,19 @@ public class FacilityCrud(
     Logger.DeletedEntity(nameof(Db.Entities.Facility), facilityId);
 
     return _mapper.Map<Contracts.Facility>(facility);
+  }
+
+  public async Task<IEnumerable<Contracts.Facility>> RemoveAsync(
+    Guid userId,
+    IEnumerable<Guid> facilityIds)
+  {
+    var facilities = await FacilityRepository
+      .FindAsync(f => f.OwnerId == userId && facilityIds.Contains(f.Id));
+    EntityNotFoundException.ThrowIfNull(facilities);
+
+    facilities.ToList().ForEach(f => FacilityRepository.Delete(f));
+    await _unitOfWork.SaveAsync();
+
+    return _mapper.Map<IEnumerable<Contracts.Facility>>(facilities);
   }
 }
