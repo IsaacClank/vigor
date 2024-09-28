@@ -2,21 +2,26 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Vigor.Common.Exception;
 
-public class UnexpectedResultException : ApplicationException
+public class UnexpectedException : ApplicationException
 {
   public static void ThrowIfNull([NotNull] object? result)
   {
     if (result is null)
     {
-      throw new UnexpectedResultException("Unexpected null result");
+      throw new UnexpectedException("Unexpected null");
     }
   }
 
-  public UnexpectedResultException(string? message) : base(message)
+  public UnexpectedException() : base("Something unexpected happened")
   {
   }
 
-  public UnexpectedResultException(string? message, System.Exception? innerException) : base(message, innerException)
+  public UnexpectedException(string? message) : base(message)
+  {
+  }
+
+  public UnexpectedException(string? message, System.Exception? innerException)
+    : base(message, innerException)
   {
   }
 }
