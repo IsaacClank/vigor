@@ -1,4 +1,4 @@
-name: Core CI
+name: CI
 
 on:
   workflow_dispatch:
@@ -6,7 +6,6 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-    paths: [ "core/**" ]
 
 jobs:
   build-and-test:
