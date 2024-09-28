@@ -1,9 +1,8 @@
-using System.Security.Claims;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using Vigor.Common.Extensions.AspNetCore;
+using Vigor.Common.Extensions.System.Security.Claims;
 using Vigor.Common.JsonApi;
 using Vigor.Core.Program.Common.Auth.Keycloak;
 using Vigor.Core.Program.Domain.Facility.Interfaces;
@@ -19,31 +18,40 @@ public class FacilityController(IFacilityCrud facilityCrud) : JsonApiController
   [Authorize(Policies.IsFacilityOwner)]
   [HttpPost]
   [ProducesResponseType<Document<Domain.Facility.Contracts.Facility>>(StatusCodes.Status200OK)]
-  public async Task<IActionResult> Create([FromBody] Domain.Facility.Contracts.UpsertFacility createFacility)
+  public async Task<IActionResult> Create(
+    [FromBody] Domain.Facility.Contracts.UpsertFacility createFacility)
   {
-    var claim = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
-    var userId = Guid.Parse(claim);
-    var createdFacility = await _facilityCrud.UpsertAsync(userId, createFacility);
+    var createdFacility = await _facilityCrud.UpsertAsync(
+      User.GetSubjectId(),
+      createFacility);
     return Ok(createdFacility);
+  }
+
+  [Authorize(Policies.IsFacilityOwner)]
+  [HttpPatch("merge")]
+  [ProducesResponseType<Document<Domain.Facility.Contracts.Facility>>(StatusCodes.Status200OK)]
+  public async Task<IActionResult> MergeUpdate(
+    [FromBody] IEnumerable<Domain.Facility.Contracts.PatchFacility> mergeUpdateFacilities)
+  {
+    var updatedFacilities = await _facilityCrud.PatchAsync(
+      User.GetSubjectId(),
+      mergeUpdateFacilities);
+    return Ok(updatedFacilities);
   }
 
   [Authorize(Policies.IsFacilityOwner)]
   [HttpGet]
   public async Task<IActionResult> FindAsync()
   {
-    var claim = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
-    var userId = Guid.Parse(claim);
-    var results = await _facilityCrud.FindAsync(userId);
-    return Ok(results);
+    return Ok(await _facilityCrud.FindAsync(User.GetSubjectId()));
   }
 
   [Authorize(Policies.IsFacilityOwner)]
   [HttpDelete("{id:guid}")]
   public async Task<IActionResult> Remove(Guid id)
   {
-    var claim = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
-    var userId = Guid.Parse(claim);
-    var removedFacility = await _facilityCrud.RemoveAsync(userId, facilityId: id);
-    return Ok(removedFacility);
+    return Ok(await _facilityCrud.RemoveAsync(
+      User.GetSubjectId(),
+      facilityId: id));
   }
 }
