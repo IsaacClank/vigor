@@ -1,9 +1,8 @@
-using System.Security.Claims;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using Vigor.Common.Extensions.AspNetCore;
+using Vigor.Common.Extensions.System.Security.Claims;
 using Vigor.Common.JsonApi;
 using Vigor.Core.Program.Common.Auth.Keycloak;
 using Vigor.Core.Program.Domain.Facility.Interfaces;
@@ -25,6 +24,18 @@ public class FacilityController(IFacilityCrud facilityCrud) : JsonApiController
     var userId = Guid.Parse(claim);
     var createdFacility = await _facilityCrud.UpsertAsync(userId, createFacility);
     return Ok(createdFacility);
+  }
+
+  [Authorize(Policies.IsFacilityOwner)]
+  [HttpPatch("merge")]
+  [ProducesResponseType<Document<Domain.Facility.Contracts.Facility>>(StatusCodes.Status200OK)]
+  public async Task<IActionResult> MergeUpdate(
+    [FromBody] IEnumerable<Domain.Facility.Contracts.PatchFacility> mergeUpdateFacilities)
+  {
+    var updatedFacilities = await _facilityCrud.PatchAsync(
+      HttpContext.User.GetSubjectId(),
+      mergeUpdateFacilities);
+    return Ok(updatedFacilities);
   }
 
   [Authorize(Policies.IsFacilityOwner)]
