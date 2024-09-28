@@ -16,5 +16,6 @@
   },
   "dotnet.dotnetPath": "/home/isaac/.dotnet",
   "editor.insertSpaces": true,
-  "task.autoDetect": "off"
+  "task.autoDetect": "off",
+  "xml.format.maxLineWidth": 120,
 }

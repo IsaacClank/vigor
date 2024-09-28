@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System.Collections.Immutable;
+
+using AutoMapper;
 
 using Microsoft.Extensions.Logging;
 
@@ -6,6 +8,7 @@ using Vigor.Common.Db.Repository;
 using Vigor.Common.Exception;
 using Vigor.Common.Extensions.Logging;
 using Vigor.Common.Extensions.System;
+using Vigor.Common.Util;
 using Vigor.Core.Program.Domain.Facility.Contracts;
 using Vigor.Core.Program.Domain.Facility.Interfaces;
 
@@ -26,7 +29,7 @@ public class FacilityCrud(
   public async Task<Contracts.Facility> UpsertAsync(
     Guid userId,
     UpsertFacility upsertFacility)
-    => _mapper.Map<Contracts.Facility>(await UpsertAsync(userId, [upsertFacility]));
+    => (await UpsertAsync(userId, [upsertFacility])).First();
 
   public async Task<IEnumerable<Contracts.Facility>> UpsertAsync(
     Guid userId,
@@ -51,6 +54,32 @@ public class FacilityCrud(
       f.Id));
 
     return _mapper.Map<IEnumerable<Contracts.Facility>>(upsertedFacilities);
+  }
+
+  public async Task<IEnumerable<Contracts.Facility>> PatchAsync(
+    Guid userId,
+    IEnumerable<PatchFacility> patchFacilities)
+  {
+    var facilityIds = patchFacilities.Select(x => x.Id);
+    var facilitiesDict = (await FacilityRepository
+      .FindAsync(f => f.OwnerId == userId && facilityIds.Contains(f.Id)))
+      .ToDictionary(f => f.Id, f => f);
+
+    patchFacilities.ToList().ForEach(patchFacility =>
+    {
+      var facility = facilitiesDict[patchFacility.Id];
+      Util.Map(
+        facility,
+        patchFacility,
+        includedProperties:
+        [
+          nameof(PatchFacility.Name),
+          nameof(PatchFacility.Address),
+        ]);
+    });
+    await _unitOfWork.SaveAsync();
+
+    return _mapper.Map<IEnumerable<Contracts.Facility>>(facilitiesDict.Values);
   }
 
   public async Task<IEnumerable<Contracts.Facility>> FindAsync(Guid userId)
