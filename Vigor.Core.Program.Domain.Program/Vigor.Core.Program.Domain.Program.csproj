@@ -17,6 +17,7 @@
     <ProjectReference Include="..\Vigor.Core.Program.Db.Entities\Vigor.Core.Program.Db.Entities.csproj" />
     <ProjectReference Include="..\Vigor.Common.Extensions.Logging\Vigor.Common.Extensions.Logging.csproj" />
     <ProjectReference Include="..\Vigor.Common.Extensions.System\Vigor.Common.Extensions.System.csproj" />
+    <ProjectReference Include="..\Vigor.Common.Util\Vigor.Common.Util.csproj" />
   </ItemGroup>
   
   <ItemGroup>

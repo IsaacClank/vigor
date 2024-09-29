@@ -12,6 +12,10 @@ public interface IProgramCrud
     Guid userId,
     IEnumerable<UpsertProgram> upsertPrograms);
 
+  public Task<IEnumerable<Contracts.Program>> PatchAsync(
+    Guid userId,
+    IEnumerable<PatchProgram> patchPrograms);
+
   public Task<IEnumerable<Contracts.Program>> FindAsync(Guid userId);
 
   public Task<Contracts.Program> RemoveAsync(Guid userId, Guid programId);
