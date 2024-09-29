@@ -17,7 +17,7 @@ public class ProgramController(IProgramCrud programCrud) : JsonApiController
   private readonly IProgramCrud _programCrud = programCrud;
 
   [HttpPost]
-  public async Task<IActionResult> UpsertAsync(
+  public async Task<ActionResult<JsonApi.Document<ProgramContracts.Program>>> UpsertAsync(
     [FromBody] IEnumerable<UpsertProgram> upsertPrograms)
   {
     return Ok(await _programCrud.UpsertAsync(
@@ -26,7 +26,7 @@ public class ProgramController(IProgramCrud programCrud) : JsonApiController
   }
 
   [HttpPatch]
-  public async Task<IActionResult> PatchAsync(
+  public async Task<ActionResult<JsonApi.Document<ProgramContracts.Program>>> PatchAsync(
     [FromBody] IEnumerable<PatchProgram> patchPrograms)
   {
     return Ok(await _programCrud.PatchAsync(
@@ -35,13 +35,13 @@ public class ProgramController(IProgramCrud programCrud) : JsonApiController
   }
 
   [HttpGet]
-  public async Task<IActionResult> FindAsync()
+  public async Task<ActionResult<JsonApi.Document<ProgramContracts.Program>>> FindAsync()
   {
     return Ok(await _programCrud.FindAsync(User.GetSubjectId()));
   }
 
   [HttpDelete]
-  public async Task<IActionResult> RemoveAsync(
+  public async Task<ActionResult<JsonApi.Document<ProgramContracts.Program>>> RemoveAsync(
     [FromBody] IEnumerable<Guid> programIds)
   {
     return Ok(await _programCrud.RemoveAsync(User.GetSubjectId(), programIds));

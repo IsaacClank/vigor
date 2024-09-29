@@ -12,6 +12,8 @@
   <ItemGroup>
     <Using Include="Vigor.Common.Auth.Keycloak" Alias="Keycloak" />
     <Using Include="Vigor.Common.JsonApi" Alias="JsonApi" />
+    <Using Include="Vigor.Core.Program.Domain.Facility.Contracts" Alias="FacilityContracts" />
+    <Using Include="Vigor.Core.Program.Domain.Program.Contracts" Alias="ProgramContracts" />
   </ItemGroup>
 
   <ItemGroup>
