@@ -51,4 +51,24 @@ public static partial class Util
     Map(dest, src, includedProperties);
     return dest;
   }
+
+  /// <summary>
+  /// Map the source object to a given type. The destination object is instantiated.
+  /// </summary>
+  /// <typeparam name="TDest">The destination type</typeparam>
+  /// <param name="src"></param>
+  /// <param name="includedProperties"></param>
+  /// <returns>The mapped object of type <typeparamref name="TDest"/></returns>
+  /// <exception cref="MissingMethodException"></exception>
+  public static IEnumerable<TDest> MapRange<TDest>(
+    IEnumerable<object> src,
+    IEnumerable<string>? includedProperties = default)
+  {
+    return src.Select(s =>
+    {
+      var dest = Activator.CreateInstance<TDest>() ?? throw new UnexpectedException();
+      Map(dest, s, includedProperties);
+      return dest;
+    });
+  }
 }

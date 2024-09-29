@@ -83,6 +83,17 @@ public partial class UtilTest
     Assert.Equal(src.Name, dest.Name);
     Assert.Equal(src.Age, dest.Age);
   }
+
+  [Fact]
+  public void Map_ToCollectionDest_Skips()
+  {
+    var src = new PersonView("Ari", 8);
+    var dest = Util.MapRange<Creature>([src]);
+
+    Assert.Single(dest);
+    Assert.Equal(src.Name, dest.First().Name);
+    Assert.Equal(src.Age, dest.First().Age);
+  }
 }
 
 class Person(string name, int age)
