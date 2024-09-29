@@ -25,6 +25,15 @@ public class ProgramController(IProgramCrud programCrud) : JsonApiController
       upsertPrograms));
   }
 
+  [HttpPatch]
+  public async Task<IActionResult> PatchAsync(
+    [FromBody] IEnumerable<PatchProgram> patchPrograms)
+  {
+    return Ok(await _programCrud.PatchAsync(
+      User.GetSubjectId(),
+      patchPrograms));
+  }
+
   [HttpGet]
   public async Task<IActionResult> FindAsync()
   {
