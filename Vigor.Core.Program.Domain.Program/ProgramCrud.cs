@@ -65,13 +65,13 @@ public class ProgramCrud(
     Guid userId,
     IEnumerable<Guid> programIds)
   {
-    var facilities = await ProgramRepo
+    var programs = await ProgramRepo
       .FindAsync(f => f.OwnerId == userId && programIds.Contains(f.Id));
-    EntityNotFoundException.ThrowIfNull(facilities);
+    EntityNotFoundException.ThrowIfNull(programs);
 
-    facilities.ToList().ForEach(f => ProgramRepo.Delete(f));
+    programs.ToList().ForEach(f => ProgramRepo.Delete(f));
     await UnitOfWork.SaveAsync();
 
-    return Mapper.Map<IEnumerable<Contracts.Program>>(facilities);
+    return Mapper.Map<IEnumerable<Contracts.Program>>(programs);
   }
 }
