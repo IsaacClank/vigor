@@ -14,28 +14,27 @@ namespace Vigor.Core.Program.Api.Http.Controllers;
 [Route("api/program")]
 public class ProgramController(IProgramCrud programCrud) : JsonApiController
 {
-  private IProgramCrud ProgramCrud { get; set; } = programCrud;
+  private readonly IProgramCrud _programCrud = programCrud;
 
   [HttpPost]
-  public async Task<IActionResult> UpsertAsync([FromBody] UpsertProgram upsertProgram)
+  public async Task<IActionResult> UpsertAsync(
+    [FromBody] IEnumerable<UpsertProgram> upsertPrograms)
   {
-    var upsertedProgram = await ProgramCrud.UpsertAsync(
-      HttpContext.User.GetSubjectId(),
-      upsertProgram);
-    return Ok(upsertedProgram);
+    return Ok(await _programCrud.UpsertAsync(
+      User.GetSubjectId(),
+      upsertPrograms));
   }
 
   [HttpGet]
   public async Task<IActionResult> FindAsync()
   {
-    var results = await ProgramCrud.FindAsync(HttpContext.User.GetSubjectId());
-    return Ok(results);
+    return Ok(await _programCrud.FindAsync(User.GetSubjectId()));
   }
 
-  [HttpDelete("{id}")]
-  public async Task<IActionResult> RemoveAsync([FromRoute] Guid id)
+  [HttpDelete]
+  public async Task<IActionResult> RemoveAsync(
+    [FromBody] IEnumerable<Guid> programIds)
   {
-    var deletedProgram = await ProgramCrud.RemoveAsync(HttpContext.User.GetSubjectId(), id);
-    return Ok(deletedProgram);
+    return Ok(await _programCrud.RemoveAsync(User.GetSubjectId(), programIds));
   }
 }
