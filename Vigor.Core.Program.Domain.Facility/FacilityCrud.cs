@@ -1,7 +1,5 @@
 ﻿using System.Collections.Immutable;
 
-using AutoMapper;
-
 using Microsoft.Extensions.Logging;
 
 using Vigor.Common.Db.Repository;
@@ -16,11 +14,9 @@ namespace Vigor.Core.Program.Domain.Facility;
 
 public class FacilityCrud(
   ILogger<FacilityCrud> logger,
-  IMapper mapper,
   IUnitOfWork unitOfWork) : IFacilityCrud
 {
   private ILogger<FacilityCrud> Logger { get; } = logger;
-  private readonly IMapper _mapper = mapper;
   private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
   private IRepository<Db.Entities.Facility> FacilityRepository
@@ -38,7 +34,7 @@ public class FacilityCrud(
     List<Db.Entities.Facility> upsertedFacilities = [];
     await Parallel.ForEachAsync(upsertFacilities, async (upsertFacility, _) =>
     {
-      var facilityToUpsert = _mapper.Map<Db.Entities.Facility>(upsertFacility);
+      var facilityToUpsert = Util.Map<Db.Entities.Facility>(upsertFacility);
       facilityToUpsert.OwnerId = userId;
 
       var upsertedFacility = upsertFacility.Id.IsEmptyOrDefault()
@@ -53,7 +49,7 @@ public class FacilityCrud(
       nameof(Db.Entities.Facility),
       f.Id));
 
-    return _mapper.Map<IEnumerable<Contracts.Facility>>(upsertedFacilities);
+    return upsertedFacilities.Select(facility => Util.Map<Contracts.Facility>(facility));
   }
 
   public async Task<IEnumerable<Contracts.Facility>> PatchAsync(
@@ -79,26 +75,17 @@ public class FacilityCrud(
     });
     await _unitOfWork.SaveAsync();
 
-    return _mapper.Map<IEnumerable<Contracts.Facility>>(facilitiesDict.Values);
+    return facilitiesDict.Values.Select(facility => Util.Map<Contracts.Facility>(facility));
   }
 
   public async Task<IEnumerable<Contracts.Facility>> FindAsync(Guid userId)
   {
     var facilities = await FacilityRepository.FindReadonlyAsync(f => f.OwnerId == userId);
-    return _mapper.Map<IEnumerable<Contracts.Facility>>(facilities);
+    return facilities.Select(facility => Util.Map<Contracts.Facility>(facility));
   }
 
   public async Task<Contracts.Facility> RemoveAsync(Guid userId, Guid facilityId)
-  {
-    var facility = await FacilityRepository.FindAsync(facilityId);
-    EntityNotFoundException.ThrowIfNull(facility);
-
-    FacilityRepository.Delete(facility);
-    await _unitOfWork.SaveAsync();
-    Logger.DeletedEntity(nameof(Db.Entities.Facility), facilityId);
-
-    return _mapper.Map<Contracts.Facility>(facility);
-  }
+    => (await RemoveAsync(userId, [facilityId])).First();
 
   public async Task<IEnumerable<Contracts.Facility>> RemoveAsync(
     Guid userId,
@@ -111,6 +98,6 @@ public class FacilityCrud(
     facilities.ToList().ForEach(f => FacilityRepository.Delete(f));
     await _unitOfWork.SaveAsync();
 
-    return _mapper.Map<IEnumerable<Contracts.Facility>>(facilities);
+    return facilities.Select(facility => Util.Map<Contracts.Facility>(facility));
   }
 }

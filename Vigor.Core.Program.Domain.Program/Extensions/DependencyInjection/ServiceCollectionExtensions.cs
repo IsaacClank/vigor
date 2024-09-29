@@ -8,12 +8,6 @@ public static class ServiceCollectionExtensions
 {
   public static void AddProgramDomain(this IServiceCollection services)
   {
-    services.AddAutoMapper(config =>
-    {
-      config.CreateMap<Contracts.UpsertProgram, Db.Entities.Program>();
-      config.CreateMap<Db.Entities.Program, Contracts.Program>();
-    });
-
     services.AddScoped<IProgramCrud, ProgramCrud>();
   }
 }

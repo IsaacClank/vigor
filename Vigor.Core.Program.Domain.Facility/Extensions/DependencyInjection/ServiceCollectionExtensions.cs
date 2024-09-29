@@ -8,12 +8,6 @@ public static class ServiceCollectionExtensions
 {
   public static void AddFacilityDomain(this IServiceCollection services)
   {
-    services.AddAutoMapper(config =>
-    {
-      config.CreateMap<Contracts.UpsertFacility, Db.Entities.Facility>();
-      config.CreateMap<Db.Entities.Facility, Contracts.Facility>();
-    });
-
     services.AddScoped<IFacilityCrud, FacilityCrud>();
   }
 }

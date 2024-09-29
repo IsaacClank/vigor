@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Vigor.Core.Program.Db.Entities\Vigor.Core.Program.Db.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-  </ItemGroup>
-
 </Project>

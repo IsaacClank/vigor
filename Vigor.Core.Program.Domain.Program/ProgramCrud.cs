@@ -1,5 +1,3 @@
-using AutoMapper;
-
 using Microsoft.Extensions.Logging;
 
 using Vigor.Common.Db.Repository;
@@ -14,11 +12,9 @@ namespace Vigor.Core.Program.Domain.Program;
 
 public class ProgramCrud(
   ILogger<ProgramCrud> logger,
-  IMapper mapper,
   IUnitOfWork unitOfWork) : IProgramCrud
 {
   private ILogger<ProgramCrud> Logger { get; set; } = logger;
-  private IMapper Mapper { get; set; } = mapper;
   private IUnitOfWork UnitOfWork { get; set; } = unitOfWork;
   private IRepository<Db.Entities.Program> ProgramRepo
     => UnitOfWork.Repository<Db.Entities.Program>();
@@ -35,7 +31,7 @@ public class ProgramCrud(
     List<Db.Entities.Program> upsertedPrograms = [];
     await Parallel.ForEachAsync(upsertPrograms, async (upsertProgram, _) =>
     {
-      var programToUpsert = Mapper.Map<Db.Entities.Program>(upsertProgram);
+      var programToUpsert = Util.Map<Db.Entities.Program>(upsertProgram);
       programToUpsert.OwnerId = userId;
 
       var upsertedProgram = upsertProgram.Id.IsEmptyOrDefault()
@@ -50,7 +46,7 @@ public class ProgramCrud(
       nameof(Db.Entities.Program),
       f.Id));
 
-    return Mapper.Map<IEnumerable<Contracts.Program>>(upsertedPrograms);
+    return Util.MapRange<Contracts.Program>(upsertedPrograms);
   }
 
   public async Task<IEnumerable<Contracts.Program>> PatchAsync(
@@ -76,14 +72,13 @@ public class ProgramCrud(
     });
     await UnitOfWork.SaveAsync();
 
-    return Mapper.Map<IEnumerable<Contracts.Program>>(programsDict.Values);
-    throw new NotImplementedException();
+    return Util.MapRange<Contracts.Program>(programsDict.Values);
   }
 
   public async Task<IEnumerable<Contracts.Program>> FindAsync(Guid userId)
   {
     var programs = await ProgramRepo.FindAsync(p => p.OwnerId == userId);
-    return Mapper.Map<IEnumerable<Contracts.Program>>(programs);
+    return Util.MapRange<Contracts.Program>(programs);
   }
 
   public async Task<Contracts.Program> RemoveAsync(Guid userId, Guid programId)
@@ -100,6 +95,6 @@ public class ProgramCrud(
     programs.ToList().ForEach(f => ProgramRepo.Delete(f));
     await UnitOfWork.SaveAsync();
 
-    return Mapper.Map<IEnumerable<Contracts.Program>>(programs);
+    return Util.MapRange<Contracts.Program>(programs);
   }
 }

@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Vigor.Common.Exception\Vigor.Common.Exception.csproj" />
     <ProjectReference Include="..\Vigor.Common.JsonApi\Vigor.Common.JsonApi.csproj" />
     <ProjectReference Include="..\Vigor.Core.Program.Db.Entities\Vigor.Core.Program.Db.Entities.csproj" />
