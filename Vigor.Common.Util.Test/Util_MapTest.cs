@@ -72,6 +72,17 @@ public partial class UtilTest
     Assert.Equal(src.Age, dest.Age);
     Assert.Equal(expectedJob, dest.Job);
   }
+
+  [Fact]
+  public void Map_DestPropNotFound_Skips()
+  {
+    var src = new Person("Isaac", 7) { Religion = "Buddhism" };
+
+    var dest = Util.Map<Creature>(src);
+
+    Assert.Equal(src.Name, dest.Name);
+    Assert.Equal(src.Age, dest.Age);
+  }
 }
 
 class Person(string name, int age)
@@ -80,6 +91,7 @@ class Person(string name, int age)
   public string Name { get; set; } = name;
   public int Age { get; set; } = age;
   public string? Job { get; set; }
+  public string? Religion { get; set; }
 }
 
 class Creature

@@ -29,7 +29,7 @@ public static partial class Util
       .GetProperties()
       .Where(prop => (includedProperties?.Contains(prop.Name) ?? true) && prop.GetValue(src) is not null)
       .ToList()
-      .ForEach(srcProp => dest.GetType().SetProperty(
+      .ForEach(srcProp => dest.GetType().TrySetProperty(
         dest,
         srcProp.Name,
         srcProp.GetValue(src) ?? throw new UnexpectedException()));
