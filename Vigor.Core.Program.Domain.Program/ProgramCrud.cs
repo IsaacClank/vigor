@@ -25,17 +25,31 @@ public class ProgramCrud(
   public async Task<Contracts.Program> UpsertAsync(
     Guid userId,
     UpsertProgram upsertProgram)
+    => (await UpsertAsync(userId, [upsertProgram])).First();
+
+  public async Task<IEnumerable<Contracts.Program>> UpsertAsync(
+    Guid userId,
+    IEnumerable<UpsertProgram> upsertPrograms)
   {
-    var programToUpserted = Mapper.Map<Db.Entities.Program>(upsertProgram);
-    programToUpserted.OwnerId = userId;
+    List<Db.Entities.Program> upsertedPrograms = [];
+    await Parallel.ForEachAsync(upsertPrograms, async (upsertProgram, _) =>
+    {
+      var programToUpsert = Mapper.Map<Db.Entities.Program>(upsertProgram);
+      programToUpsert.OwnerId = userId;
 
-    var upsertedProgram = upsertProgram.Id.IsEmptyOrDefault()
-      ? await ProgramRepo.InsertAsync(programToUpserted)
-      : ProgramRepo.Update(programToUpserted);
+      var upsertedProgram = upsertProgram.Id.IsEmptyOrDefault()
+        ? await ProgramRepo.InsertAsync(programToUpsert)
+        : ProgramRepo.Update(programToUpsert);
+
+      upsertedPrograms.Add(upsertedProgram);
+    });
+
     await UnitOfWork.SaveAsync();
-    Logger.UpsertedEntity(nameof(Db.Entities.Program), upsertedProgram.Id);
+    upsertedPrograms.ForEach(f => Logger.UpsertedEntity(
+      nameof(Db.Entities.Program),
+      f.Id));
 
-    return Mapper.Map<Contracts.Program>(upsertedProgram);
+    return Mapper.Map<IEnumerable<Contracts.Program>>(upsertedPrograms);
   }
 
   public async Task<IEnumerable<Contracts.Program>> FindAsync(Guid userId)
@@ -45,14 +59,19 @@ public class ProgramCrud(
   }
 
   public async Task<Contracts.Program> RemoveAsync(Guid userId, Guid programId)
+    => (await RemoveAsync(userId, [programId])).First();
+
+  public async Task<IEnumerable<Contracts.Program>> RemoveAsync(
+    Guid userId,
+    IEnumerable<Guid> programIds)
   {
-    var programToDelete = await ProgramRepo.FindAsync(programId);
-    EntityNotFoundException.ThrowIfNull(programToDelete);
+    var facilities = await ProgramRepo
+      .FindAsync(f => f.OwnerId == userId && programIds.Contains(f.Id));
+    EntityNotFoundException.ThrowIfNull(facilities);
 
-    var deletedProgram = ProgramRepo.Delete(programToDelete);
+    facilities.ToList().ForEach(f => ProgramRepo.Delete(f));
     await UnitOfWork.SaveAsync();
-    Logger.DeletedEntity(nameof(Db.Entities.Program), programId);
 
-    return Mapper.Map<Contracts.Program>(deletedProgram);
+    return Mapper.Map<IEnumerable<Contracts.Program>>(facilities);
   }
 }

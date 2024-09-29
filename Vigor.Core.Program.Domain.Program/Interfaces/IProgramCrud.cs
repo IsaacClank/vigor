@@ -8,7 +8,15 @@ public interface IProgramCrud
     Guid userId,
     UpsertProgram upsertProgram);
 
+  public Task<IEnumerable<Contracts.Program>> UpsertAsync(
+    Guid userId,
+    IEnumerable<UpsertProgram> upsertPrograms);
+
   public Task<IEnumerable<Contracts.Program>> FindAsync(Guid userId);
 
   public Task<Contracts.Program> RemoveAsync(Guid userId, Guid programId);
+
+  public Task<IEnumerable<Contracts.Program>> RemoveAsync(
+    Guid userId,
+    IEnumerable<Guid> programIds);
 }
