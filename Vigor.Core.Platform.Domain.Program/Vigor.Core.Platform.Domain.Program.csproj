@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AnalysisLevel>8-Recommended</AnalysisLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vigor.Common.Exception\Vigor.Common.Exception.csproj" />
+    <ProjectReference Include="..\Vigor.Common.JsonApi\Vigor.Common.JsonApi.csproj" />
+    <ProjectReference Include="..\Vigor.Core.Platform.Db.Entities\Vigor.Core.Platform.Db.Entities.csproj" />
+    <ProjectReference Include="..\Vigor.Common.Extensions.Logging\Vigor.Common.Extensions.Logging.csproj" />
+    <ProjectReference Include="..\Vigor.Common.Extensions.System\Vigor.Common.Extensions.System.csproj" />
+    <ProjectReference Include="..\Vigor.Common.Util\Vigor.Common.Util.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Using Include="Vigor.Common.JsonApi" Alias="JsonApi" />
+  </ItemGroup>
+
+</Project>

@@ -6,7 +6,7 @@
       "type": "pickString",
       "description": "Project",
       "options": [
-        "${workspaceFolder}/Vigor.Core.Program.Api.Http"
+        "${workspaceFolder}/Vigor.Core.Platform.Api.Http"
       ]
     }
   ],
@@ -15,7 +15,7 @@
       "name": "Launch",
       "type": "coreclr",
       "request": "launch",
-      "program": "${input:project}/bin/Debug/net8.0/Vigor.Core.Program.Api.Http.dll",
+      "program": "${input:project}/bin/Debug/net8.0/Vigor.Core.Platform.Api.Http.dll",
       "args": [],
       "env": {
         "DOTNET_ENVIRONMENT": "Development"

@@ -9,13 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Db.Repository"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Exception", "Vigor.Common.Exception\Vigor.Common.Exception.csproj", "{F9356E35-0580-46DA-A7C5-4A82A4998EE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Db", "Vigor.Core.Program.Db\Vigor.Core.Program.Db.csproj", "{80073224-B5BA-413A-90F4-1D8E5738F4AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Platform.Db", "Vigor.Core.Platform.Db\Vigor.Core.Platform.Db.csproj", "{80073224-B5BA-413A-90F4-1D8E5738F4AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Db.Broadcast", "Vigor.Core.Program.Db.Broadcast\Vigor.Core.Program.Db.Broadcast.csproj", "{88F11281-225E-438E-8E0C-640BD50DD4FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Platform.Db.Broadcast", "Vigor.Core.Platform.Db.Broadcast\Vigor.Core.Platform.Db.Broadcast.csproj", "{88F11281-225E-438E-8E0C-640BD50DD4FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Api.Queue", "Vigor.Core.Program.Api.Queue\Vigor.Core.Program.Api.Queue.csproj", "{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Platform.Api.Queue", "Vigor.Core.Platform.Api.Queue\Vigor.Core.Platform.Api.Queue.csproj", "{0EBD139A-FCD0-42E7-9BDC-C3D7F1A3481E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Api.Http", "Vigor.Core.Program.Api.Http\Vigor.Core.Program.Api.Http.csproj", "{185097B8-53D7-4672-8843-FE16F555C289}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Platform.Api.Http", "Vigor.Core.Platform.Api.Http\Vigor.Core.Platform.Api.Http.csproj", "{185097B8-53D7-4672-8843-FE16F555C289}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Auth.Keycloak", "Vigor.Common.Auth.Keycloak\Vigor.Common.Auth.Keycloak.csproj", "{A3ADF841-7303-4092-AA08-DDE9F5BEB711}"
 EndProject
@@ -25,13 +25,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Extensions.Asp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Db.PostgreSql", "Vigor.Common.Db.PostgreSql\Vigor.Common.Db.PostgreSql.csproj", "{16F781B5-D532-4DF0-94A4-25AF0A0E2185}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Domain.Facility", "Vigor.Core.Program.Domain.Facility\Vigor.Core.Program.Domain.Facility.csproj", "{83953900-2638-42F2-9DC7-00F462659387}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Platform.Domain.Facility", "Vigor.Core.Platform.Domain.Facility\Vigor.Core.Platform.Domain.Facility.csproj", "{83953900-2638-42F2-9DC7-00F462659387}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Db.Entities", "Vigor.Core.Program.Db.Entities\Vigor.Core.Program.Db.Entities.csproj", "{B45FB87F-6318-47E1-B463-9AEC911108DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Platform.Db.Entities", "Vigor.Core.Platform.Db.Entities\Vigor.Core.Platform.Db.Entities.csproj", "{B45FB87F-6318-47E1-B463-9AEC911108DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Common.Auth.Keycloak", "Vigor.Core.Program.Common.Auth.Keycloak\Vigor.Core.Program.Common.Auth.Keycloak.csproj", "{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Platform.Common.Auth.Keycloak", "Vigor.Core.Platform.Common.Auth.Keycloak\Vigor.Core.Platform.Common.Auth.Keycloak.csproj", "{18F97470-9ABF-4AE6-BFC8-78CD037C60BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Program.Domain.Program", "Vigor.Core.Program.Domain.Program\Vigor.Core.Program.Domain.Program.csproj", "{FBCC3123-952F-4938-A79E-B2F08AD417D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Core.Platform.Domain.Program", "Vigor.Core.Platform.Domain.Program\Vigor.Core.Platform.Domain.Program.csproj", "{FBCC3123-952F-4938-A79E-B2F08AD417D6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vigor.Common.Extensions.Logging", "Vigor.Common.Extensions.Logging\Vigor.Common.Extensions.Logging.csproj", "{28981062-AF1B-4B06-8523-39AA7DEF64A7}"
 EndProject

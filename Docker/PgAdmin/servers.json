@@ -1,11 +1,11 @@
 {
     "Servers": {
         "1": {
-            "Name": "program",
+            "Name": "platform",
             "Group": "Servers",
-            "Host": "program_db",
+            "Host": "platform_db",
             "Port": 5432,
-            "MaintenanceDB": "program",
+            "MaintenanceDB": "platform",
             "Username": "admin",
             "TunnelPort": "22",
             "KerberosAuthentication": false,
