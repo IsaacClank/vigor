@@ -3,9 +3,7 @@ name: CI
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build-and-test:
@@ -19,7 +17,7 @@ jobs:
     name: Discover ${{ matrix.language }} vunerabilities
     strategy:
       matrix:
-        language: [ "csharp" ]
+        language: ["csharp"]
     permissions:
       security-events: write
       packages: read # required to fetch internal or private CodeQL packs

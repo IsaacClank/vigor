@@ -1,0 +1,46 @@
+name: .NET - Build and test
+
+on:
+  workflow_call:
+    inputs:
+      dotnet-version:
+        type: string
+        description: The .NET version to use
+        default: 8.0.x
+      package-path:
+        type: string
+        description: Path to the .NET solution
+        default: ./
+
+permissions:
+  packages: write
+  contents: read
+
+jobs:
+  build-and-publish:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Authenticate with Registry
+        run:
+          dotnet nuget add source "https://nuget.pkg.github.com/IsaacClank/index.json"
+          --name github
+          --username IsaacClank
+          --password ${{secrets.GITHUB_TOKEN}}
+          --store-password-in-clear-text
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ inputs.dotnet-version }}
+      - name: Restore dependencies
+        run: dotnet restore ${{ inputs.package-path }}
+      - name: Build
+        run: dotnet build ${{ inputs.package-path }}
+      - name: Package
+        run: dotnet pack ${{ inputs.package-path }}
+      - name: Publish
+        working-directory: ${{inputs.package-path}}/bin/Release
+        run: for artifact in ./*.nupkg;
+          do dotnet nuget push $artifact --source github --skip-duplicate;
+          done

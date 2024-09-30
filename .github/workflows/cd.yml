@@ -1,0 +1,21 @@
+name: CD
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+
+permissions:
+  packages: write
+  contents: read
+
+jobs:
+  build-and-publish-nuget-packages:
+    name: Build and publish NuGet packages
+    strategy:
+      matrix:
+        package: ["Vigor.Common.Util"]
+    uses: ./.github/workflows/_build-and-publish-nuget-package.yml
+    with:
+      dotnet-version: 8.0
+      package-path: ${{matrix.package}}
