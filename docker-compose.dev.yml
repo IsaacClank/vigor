@@ -49,6 +49,25 @@ services:
       - POSTGRES_USER=$PLATFORM_DB_USERNAME
       - POSTGRES_PASSWORD=$PLATFORM_DB_PASSWORD
 
+  platform_api_http:
+    depends_on:
+      - platform_db
+      - keycloak
+    build:
+      context: .
+      dockerfile: ./Docker/Core/Platform/Api/Http/Dockerfile
+    ports:
+      - 4000:8080
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - Keycloak__Audience=core-platform
+      - Keycloak__Authority=http://keycloak:8080/realms/$KC_REALM
+      - Keycloak__Realm=${KC_REALM}
+      - Keycloak__RequireHttpsMetadata=false
+      - Keycloak__ServerUrl=http://keycloak:8080
+      - Keycloak__ValidIssuers__0=${KC_HOST}:${KC_HOST_PORT}/realms/${KC_REALM}
+      - ConnectionStrings__PlatformDb=Host=platform_db;Port=5432;Database=$PLATFORM_DB_NAME;Username=$PLATFORM_DB_USERNAME;Password=$PLATFORM_DB_PASSWORD
+
   user_db:
     build: ./Docker/Core/User/Db
     ports:
