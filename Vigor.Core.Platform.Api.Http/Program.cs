@@ -32,11 +32,6 @@ builder.Services.AddSwaggerGen(o =>
     Scheme = "bearer",
     In = ParameterLocation.Header,
   });
-  o.AddSecurityDefinition("OAuth2.0", new()
-  {
-    Type = SecuritySchemeType.OpenIdConnect,
-    OpenIdConnectUrl = new("http://localhost:2000/realms/vigor-dev/.well-known/openid-configuration"),
-  });
   o.AddSecurityRequirement(new()
   {
     {
