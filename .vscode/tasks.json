@@ -22,7 +22,7 @@
       "dependsOn": "sln:clean",
       "problemMatcher": [
         "$msCompile"
-      ],
+      ]
     },
     {
       "label": "sln:build",
